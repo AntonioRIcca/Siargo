@@ -86,6 +86,7 @@ mb_reg = {
     },
 }
 
+
 client = ModbusSerialClient(
     port="COM6",  # TODO: inserire la COM esatta
     startbit=1,
