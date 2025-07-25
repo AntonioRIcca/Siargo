@@ -55,9 +55,9 @@
    <widget class="QDoubleSpinBox" name="flowSetDsb">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>90</x>
       <y>360</y>
-      <width>101</width>
+      <width>140</width>
       <height>25</height>
      </rect>
     </property>
@@ -83,9 +83,9 @@
    <widget class="QLabel" name="flowSetLbl">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>20</x>
       <y>360</y>
-      <width>47</width>
+      <width>70</width>
       <height>25</height>
      </rect>
     </property>
@@ -109,9 +109,9 @@
    <widget class="QDoubleSpinBox" name="flowReadDsb">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>90</x>
       <y>330</y>
-      <width>101</width>
+      <width>140</width>
       <height>25</height>
      </rect>
     </property>
@@ -143,14 +143,61 @@
    <widget class="QLabel" name="flowReadLbl">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>20</x>
       <y>330</y>
-      <width>47</width>
+      <width>70</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
      <string>Read</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="flowRateDsb">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>390</y>
+      <width>140</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(216, 216, 216);</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="buttonSymbols">
+     <enum>QAbstractSpinBox::NoButtons</enum>
+    </property>
+    <property name="suffix">
+     <string> NmL/min</string>
+    </property>
+    <property name="maximum">
+     <double>9999.989999999999782</double>
+    </property>
+    <property name="singleStep">
+     <double>50.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>9999.989999999999782</double>
+    </property>
+   </widget>
+   <widget class="QLabel" name="flowRateLbl">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>390</y>
+      <width>70</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Flow Rate</string>
     </property>
    </widget>
   </widget>

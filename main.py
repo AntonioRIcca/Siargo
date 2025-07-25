@@ -1,11 +1,21 @@
+import copy
+
+import yaml
 from pymodbus.client import ModbusSerialClient  # per pymodbus 3.3.x e Python 3.11
-from ui_mainUi import Ui_MainWindow
-from PySide6 import QtWidgets, QtCore, QtGui
+from mainUi import Ui_MainWindow
+from PyQt5 import QtWidgets, QtCore, QtGui
 
 from threading import Thread
 
 import sys
 
+import serial.tools.list_ports
+
+from Utility.variables import instr
+
+for port in serial.tools.list_ports.comports():
+    print(f'Current port: {port.name}')
+# print(list(serial.tools.list_ports.comports()))
 
 mb_conn = True
 
@@ -20,8 +30,13 @@ mb_reg = {
         'desc': 'Serial number of the product',
         'value': 0,
     },
-    'Current flow rate': {
+    'Flow rate 1': {
         'reg': 59,
+        'desc': 'Serial number of the product',
+        'value': 0,
+    },
+    'Flow rate 2': {
+        'reg': 60,
         'desc': 'Serial number of the product',
         'value': 0,
     },
@@ -40,8 +55,13 @@ mb_reg = {
         'desc': 'Set the flow rate in percentage of the full-scale flow',
         'value': 0,
     },
-    'Set point flow': {
+    'Flow1': {
         'reg': 189,
+        'desc': 'Read the current flow rate set by the user',
+        'value': 0,
+    },
+    'Flow2': {
+        'reg': 190,
         'desc': 'Read the current flow rate set by the user',
         'value': 0,
     },
@@ -98,6 +118,8 @@ class Main:
         self.app = QtWidgets.QApplication(sys.argv)
         self.mainwindow = QtWidgets.QMainWindow()
 
+        self.mb_conn_par()
+
         # self.interface_open()
         f0 = Thread(target=self.interface_open())
         f0.start()
@@ -111,6 +133,9 @@ class Main:
         self.ui.setupUi(self.mainwindow)
 
         self.tab_create()
+
+        if not self.mb_check():
+            self.com_selection()
 
         self.mb_connect()
 
@@ -128,7 +153,7 @@ class Main:
 
     def mb_connect(self):
         self.client = ModbusSerialClient(
-            port="COM6",  # TODO: inserire la COM esatta
+            port=instr['conn']['com'],
             startbit=1,
             databits=8,
             parity="N",
@@ -140,6 +165,21 @@ class Main:
             # unit=31
         )
 
+    def mb_check(self):
+        self.mb_connect()
+        try:
+            test = self.client.read_holding_registers(address=48, count=1, slave=instr['conn']['slave']).registers[0]
+        except:
+            test = 0
+        self.client.close()
+        return test > 0
+
+    def mb_conn_par(self):
+        with open('_data/config.yml') as f:
+            cfg = yaml.safe_load(f)
+        for p in cfg:
+            instr[p] = copy.deepcopy(cfg[p])
+
     def mb_reg_read_all(self, lenght=200):
         results = []
         if self.client.connect():  # Connessione al dispositivo
@@ -147,7 +187,9 @@ class Main:
             addr = 0
             while addr < registers:
                 count = min(100, registers-addr)
-                results += self.client.read_holding_registers(address=addr, count=count, slave=1).registers
+                results += self.client.read_holding_registers(address=addr,
+                                                              count=count,
+                                                              slave=instr['conn']['slave']).registers
                 addr += count
 
             for par in mb_reg:
@@ -177,10 +219,22 @@ class Main:
             print(i, par, mb_reg[par]['value'])
             self.ui.regTW.item(i, 2).setText(str(mb_reg[par]['value']))
 
+        self.ui.flowRateDsb.setValue((mb_reg['Flow rate 1']['value'] * 65536 + mb_reg['Flow rate 2']['value']) / 1000)
+        self.ui.flowReadDsb.setValue((mb_reg['Flow1']['value'] * 65536 + mb_reg['Flow2']['value']) / 1000)
+
     def setpoint_set(self):
         if self.client.connect():  # Connessione al dispositivo
             value = self.ui.flowSetDsb.value() / 1000 * 64000
-            self.client.write_register(slave=1, address=187, value=int(value))
+            self.client.write_register(slave=instr['conn']['slave'], address=187, value=int(value))
+
+    def com_selection(self):
+        self.client.close()
+
+        from Utility.COM.com import Com
+        self.comsel = Com()
+        self.comsel.show()
+        self.comsel.exec_()
+
 
     def dopo(self):
         if client.connect():  # Connessione al dispositivo

@@ -1,0 +1,5 @@
+conn:
+  com: COM6
+  slave: 1
+flux:
+  cap: 1000
