@@ -8,6 +8,7 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from threading import Thread
 
 import sys
+import os
 
 import serial.tools.list_ports
 
@@ -115,8 +116,14 @@ mb_reg = {
 
 class Main:
     def __init__(self):
+        os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"     # Necessaria per il rescaling
+
         self.app = QtWidgets.QApplication(sys.argv)
+
+        # -- Necessario per il rescaling --------------
+        self.app.setAttribute(QtCore.Qt.ApplicationAttribute.AA_EnableHighDpiScaling)
         self.mainwindow = QtWidgets.QMainWindow()
+        # ---------------------------------------------
 
         self.mb_conn_par()
 
