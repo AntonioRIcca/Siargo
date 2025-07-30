@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>369</width>
-    <height>518</height>
+    <height>573</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -71,13 +71,13 @@
      <string> NmL/min</string>
     </property>
     <property name="maximum">
-     <double>9999.989999999999782</double>
+     <double>1000.000000000000000</double>
     </property>
     <property name="singleStep">
      <double>50.000000000000000</double>
     </property>
     <property name="value">
-     <double>9999.989999999999782</double>
+     <double>0.000000000000000</double>
     </property>
    </widget>
    <widget class="QLabel" name="flowSetLbl">
@@ -128,7 +128,7 @@
      <enum>QAbstractSpinBox::NoButtons</enum>
     </property>
     <property name="suffix">
-     <string> NmL/min</string>
+     <string>%</string>
     </property>
     <property name="maximum">
      <double>9999.989999999999782</double>
@@ -137,7 +137,7 @@
      <double>50.000000000000000</double>
     </property>
     <property name="value">
-     <double>9999.989999999999782</double>
+     <double>0.000000000000000</double>
     </property>
    </widget>
    <widget class="QLabel" name="flowReadLbl">
@@ -184,7 +184,7 @@
      <double>50.000000000000000</double>
     </property>
     <property name="value">
-     <double>9999.989999999999782</double>
+     <double>0.000000000000000</double>
     </property>
    </widget>
    <widget class="QLabel" name="flowRateLbl">
@@ -198,6 +198,60 @@
     </property>
     <property name="text">
      <string>Flow Rate</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="fake_flowReadLbl">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>470</y>
+      <width>70</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Fake Read</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="fake_flowReadDsb">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>470</y>
+      <width>140</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="buttonSymbols">
+     <enum>QAbstractSpinBox::NoButtons</enum>
+    </property>
+    <property name="suffix">
+     <string> NmL/min</string>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>50.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>0.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="fakeCkb">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>480</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>CheckBox</string>
     </property>
    </widget>
   </widget>

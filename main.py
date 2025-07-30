@@ -12,106 +12,13 @@ import os
 
 import serial.tools.list_ports
 
-from Utility.variables import instr
+from Utility.variables import instr, mb_reg
 
 for port in serial.tools.list_ports.comports():
     print(f'Current port: {port.name}')
 # print(list(serial.tools.list_ports.comports()))
 
 mb_conn = True
-
-mb_reg = {
-    'Function': {
-        'reg': 130,
-        'desc': 'Product Address',
-        'value': 0,
-    },
-    'Serial number': {
-        'reg': 49,
-        'desc': 'Serial number of the product',
-        'value': 0,
-    },
-    'Flow rate 1': {
-        'reg': 59,
-        'desc': 'Serial number of the product',
-        'value': 0,
-    },
-    'Flow rate 2': {
-        'reg': 60,
-        'desc': 'Serial number of the product',
-        'value': 0,
-    },
-    'Baud rate': {
-        'reg': 131,
-        'desc': 'Communication baud rate',
-        'value': 0,
-    },
-    'Set point source': {
-        'reg': 187,
-        'desc': 'Set the setpoint source',
-        'value': 0,
-    },
-    'Set point Flow Code': {
-        'reg': 188,
-        'desc': 'Set the flow rate in percentage of the full-scale flow',
-        'value': 0,
-    },
-    'Flow1': {
-        'reg': 189,
-        'desc': 'Read the current flow rate set by the user',
-        'value': 0,
-    },
-    'Flow2': {
-        'reg': 190,
-        'desc': 'Read the current flow rate set by the user',
-        'value': 0,
-    },
-    'P gain': {
-        'reg': 191,
-        'desc': 'PD proportional control of the valve/flow rate',
-        'value': 0,
-    },
-    'D gain': {
-        'reg': 192,
-        'desc': 'PD differential control of the valve/flow rate',
-        'value': 0,
-    },
-    'Valve preload offset': {
-        'reg': 193,
-        'desc': 'Default or preloaded valve opening',
-        'value': 0,
-    },
-    'Exhaust mode': {
-        'reg': 194,
-        'desc': 'Set the exhaust mode',
-        'value': 0,
-    },
-    'Exhaust valve': {
-        'reg': 195,
-        'desc': 'Percentage of the opened valve (Open loop control)',
-        'value': 0,
-    },
-    'Valve status': {
-        'reg': 196,
-        'desc': 'Percentage of the opened valve',
-        'value': 0,
-    },
-    # 'Offset calibration': {
-    #     'reg': 241,
-    #     'desc': 'Offset reset or calibration',
-    #     'value': 0,
-    # },
-    # 'Write protection': {
-    #     'reg': 256,
-    #     'desc': 'Write protection of selected parameters',
-    #     'value': 0,
-    # },
-    'GCF': {
-        'reg': 140,
-        'desc': 'Write protection of selected parameters',
-        'value': 0,
-    },
-}
 
 
 class Main:
@@ -152,7 +59,7 @@ class Main:
         # ------------------------------------------------------------------------------------------------
 
         timer = QtCore.QTimer()
-        timer.timeout.connect(self.tab_refresh)
+        timer.timeout.connect(self.refresh)
         timer.start(1000)
 
         self.mainwindow.show()
@@ -223,11 +130,8 @@ class Main:
         # print(self.ui.regTW.item(2, 2).text())
         for i in range(len(list(mb_reg.keys()))):
             par = self.ui.regTW.item(i, 0).text()
-            print(i, par, mb_reg[par]['value'])
+            # print(i, par, mb_reg[par]['value'])
             self.ui.regTW.item(i, 2).setText(str(mb_reg[par]['value']))
-
-        self.ui.flowRateDsb.setValue((mb_reg['Flow rate 1']['value'] * 65536 + mb_reg['Flow rate 2']['value']) / 1000)
-        self.ui.flowReadDsb.setValue((mb_reg['Flow1']['value'] * 65536 + mb_reg['Flow2']['value']) / 1000)
 
     def setpoint_set(self):
         if self.client.connect():  # Connessione al dispositivo
@@ -241,6 +145,16 @@ class Main:
         self.comsel = Com()
         self.comsel.show()
         self.comsel.exec_()
+
+    def refresh(self):
+        if self.ui.fakeCkb.isChecked():
+            self.ui.flowRateDsb.setValue(self.ui.fake_flowReadDsb.value())
+            print('Fake read', self.ui.fake_flowReadDsb.value())
+        else:
+            self.ui.flowRateDsb.setValue(
+                (mb_reg['Flow rate 1']['value'] * 65536 + mb_reg['Flow rate 2']['value']) / 1000)
+            self.ui.flowReadDsb.setValue((mb_reg['Flow1']['value'] * 65536 + mb_reg['Flow2']['value']) / 1000)
+        self.tab_refresh()
 
 
     def dopo(self):
