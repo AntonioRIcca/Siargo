@@ -3,20 +3,21 @@ from itertools import count
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+import time
 
-plt.style.use('fivethirtyeight')
+# plt.style.use('fivethirtyeight')
+#
+# x_vals = []
+# y_vals = []
 
-x_vals = []
-y_vals = []
-
-index = count()
+# index = count()
 
 
 def animate(i):
     data = pd.read_csv('data.csv')
-    x = data['x_value']
-    y1 = data['total_1']
-    y2 = data['total_2']
+    x = data['time [s]']
+    y1 = data['Q_set [Nml/min]']
+    y2 = data['Q_read [NmL/min']
 
     plt.cla()
 
@@ -27,7 +28,15 @@ def animate(i):
     plt.tight_layout()
 
 
-ani = FuncAnimation(plt.gcf(), animate, interval=1000)
+a = FuncAnimation(plt.gcf(), animate, interval=1000)
+# ani = FuncAnimation(plt.gcf(), animate, interval=1000)
 
 plt.tight_layout()
 plt.show()
+
+# while True:
+#     time.sleep(5)
+#     ani = FuncAnimation(plt.gcf(), animate, interval=1000)
+#
+#     plt.tight_layout()
+#     plt.show()

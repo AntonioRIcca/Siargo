@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>369</width>
+    <width>978</width>
     <height>573</height>
    </rect>
   </property>
@@ -254,13 +254,40 @@
      <string>CheckBox</string>
     </property>
    </widget>
+   <widget class="QWidget" name="graphMainWgt" native="true">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>10</y>
+      <width>600</width>
+      <height>400</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="graphMainHBL">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+    </layout>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>369</width>
+     <width>978</width>
      <height>21</height>
     </rect>
    </property>

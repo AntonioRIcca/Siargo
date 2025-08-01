@@ -5,6 +5,15 @@ from pymodbus.client import ModbusSerialClient  # per pymodbus 3.3.x e Python 3.
 from mainUi import Ui_MainWindow
 from PyQt5 import QtWidgets, QtCore, QtGui
 
+import csv
+
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+
+import time
+
 from threading import Thread
 
 import sys
@@ -52,6 +61,26 @@ class Main:
             self.com_selection()
 
         self.mb_connect()
+
+        # -- Grafico -------------------------------------------------------------------------------------
+        # a = FuncAnimation(plt.gcf(), self.animate, interval=1000)
+        # plt.tight_layout()
+        # plt.show()
+
+        self.start_t = time.perf_counter()
+
+        fieldnames = ['time [s]', 'Q_set [Nml/min]', 'Q_read [NmL/min]']
+        # fieldnames = ['time [s]']
+        with open('_data/data.csv', 'w',  newline='') as csv_file:
+            csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+            csv_writer.writeheader()
+            #
+            # line = {'time [s]': 0}
+            #
+            # csv_writer.writerow(line)
+
+        self.graph_init()
+        # ------------------------------------------------------------------------------------------------
 
         # -- Definizione delle azioni --------------------------------------------------------------------
         self.ui.refreshPb.clicked.connect(self.tab_refresh)
@@ -155,6 +184,70 @@ class Main:
                 (mb_reg['Flow rate 1']['value'] * 65536 + mb_reg['Flow rate 2']['value']) / 1000)
             self.ui.flowReadDsb.setValue((mb_reg['Flow1']['value'] * 65536 + mb_reg['Flow2']['value']) / 1000)
         self.tab_refresh()
+        self.data_storage()
+        self.graph_update()
+
+    def data_storage(self):
+        fieldnames = ['time [s]', 'Q_set [Nml/min]', 'Q_read [NmL/min]']
+
+        with open('_data/data.csv', 'a', newline='') as csv_file:
+            csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+
+            line = {
+                'time [s]': (time.perf_counter() - self.start_t) / 60,
+                'Q_set [Nml/min]': self.ui.flowSetDsb.value(),
+                'Q_read [NmL/min]': self.ui.flowRateDsb.value()
+            }
+
+            csv_writer.writerow(line)
+
+    def graph_init(self):
+        self.graph_canvas = FigureCanvas(plt.Figure(figsize=(3, 2)))
+        self.ax_Q = self.graph_canvas.figure.subplots()
+        self.ui.graphMainHBL.addWidget(self.graph_canvas)
+
+        self.line_Qset = self.ax_Q.plot([0, 1], [0, 10], label='Q Set')[0]
+        self.line_Qread = self.ax_Q.plot([0, 1], [0, 7], label='Q read')[0]
+        self.ax_Q.set_xlabel('Time [min]')
+        self.ax_Q.set_ylabel('Flow Rate [NmL/min]')
+
+        self.handles_Q = self.ax_Q.get_legend_handles_labels()[0]
+        self.labels_Q = self.ax_Q.get_legend_handles_labels()[1]
+        self.ax_Q.legend(self.handles_Q, self.labels_Q)
+
+    def graph_update(self):
+        data = pd.read_csv('_data/data.csv')
+        self.line_Qset.set_xdata(data['time [s]'])
+        self.line_Qread.set_xdata(data['time [s]'])
+        self.line_Qset.set_ydata(data['Q_set [Nml/min]'])
+        self.line_Qread.set_ydata(data['Q_read [NmL/min]'])
+
+        xlim = max(max(data['time [s]']), 1)
+        ylim = max(max(data['Q_set [Nml/min]']), max(data['Q_read [NmL/min]'])) + 50
+
+        self.ax_Q.set_xlim(right=xlim)
+        self.ax_Q.set_ylim(top=ylim)
+
+
+        self.graph_canvas.draw()
+        self.graph_canvas.flush_events()
+        pass
+
+    def animate(self, i):
+        data = pd.read_csv('Utility/data.csv')
+        x = data['time [s]']
+        y1 = data['Q_set [Nml/min]']
+        y2 = data['Q_read [NmL/min']
+
+        print(y2)
+
+        plt.cla()
+
+        plt.plot(x, y1, label='Channel 1')
+        plt.plot(x, y2, label='Channel 2')
+
+        plt.legend(loc='upper left')
+        plt.tight_layout()
 
 
     def dopo(self):
