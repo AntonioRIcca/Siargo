@@ -154,7 +154,7 @@ class Main:
         print(self.ui.regTW.rowCount())
 
     def tab_refresh(self):
-        print('refresh')
+        # print('refresh')
         self.mb_reg_read_all()
         # print(self.ui.regTW.item(2, 2).text())
         for i in range(len(list(mb_reg.keys()))):
@@ -194,7 +194,7 @@ class Main:
             csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
 
             line = {
-                'time [s]': (time.perf_counter() - self.start_t) / 60,
+                'time [s]': (time.perf_counter() - self.start_t) / 1,   #TODO: deve diventare 60
                 'Q_set [Nml/min]': self.ui.flowSetDsb.value(),
                 'Q_read [NmL/min]': self.ui.flowRateDsb.value()
             }
@@ -222,16 +222,43 @@ class Main:
         self.line_Qset.set_ydata(data['Q_set [Nml/min]'])
         self.line_Qread.set_ydata(data['Q_read [NmL/min]'])
 
-        xlim = max(max(data['time [s]']), 1)
+        self.ui.xminDsb.setEnabled(not self.ui.xautorangePb.isChecked())
+        self.ui.xmaxDsb.setEnabled(not self.ui.xautorangePb.isChecked())
+
+        if self.ui.xautorangePb.isChecked():
+            self.ui.xminDsb.setValue(max(0, max(data['time [s]']) - self.ui.xrangeDsb.value()))
+            self.ui.xmaxDsb.setValue(max(max(data['time [s]']), 1))
+            try:
+                self.ui.xposSld.valueChanged.disconnect()
+            except:
+                pass
+        else:
+            try:
+                self.ui.xposSld.valueChanged.connect(self.xslide_changed)
+                self.ui.xposSld.setValue(int(self.ui.xmaxDsb.value()))
+            except:
+                pass
+
+        self.ui.xposSld.setMinimum(int(max(data['time [s]']) - self.ui.xrangeDsb.value()))
+        self.ui.xposSld.setMaximum(int(max(data['time [s]'])))
+
+        # xlim = max(max(data['time [s]']), 1)
         ylim = max(max(data['Q_set [Nml/min]']), max(data['Q_read [NmL/min]'])) + 50
 
-        self.ax_Q.set_xlim(right=xlim)
+        self.ax_Q.set_xlim(left=self.ui.xminDsb.value(),
+                           right=self.ui.xmaxDsb.value())
         self.ax_Q.set_ylim(top=ylim)
 
 
         self.graph_canvas.draw()
         self.graph_canvas.flush_events()
         pass
+
+    def xslide_changed(self):
+        print('Slide cambiato')
+        self.ui.xmaxDsb.setValue(self.ui.xposSld.value())
+        self.ui.xminDsb.setValue(self.ui.xposSld.value() - self.ui.xrangeDsb.value())
+
 
     def animate(self, i):
         data = pd.read_csv('Utility/data.csv')

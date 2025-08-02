@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddd04687-eb32-4bb0-80f8-f31b715f311f" name="Changes" comment="base acquisizione dati e grafico">
-      <change beforePath="$PROJECT_DIR$/.idea/Siargo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Siargo.iml" afterDir="false" />
+    <list default="true" id="ddd04687-eb32-4bb0-80f8-f31b715f311f" name="Changes" comment="Primo tentativo grafico">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utility/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Utility/data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utility/graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/Utility/graph.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_data/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/_data/data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainUi.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainUi.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainUi.ui" beforeDir="false" afterPath="$PROJECT_DIR$/mainUi.ui" afterDir="false" />
@@ -190,7 +188,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753888937848</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Primo tentativo grafico">
+      <option name="closed" value="true" />
+      <created>1754055194494</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1754055194494</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -209,17 +215,7 @@
     <MESSAGE value="Prima interfaccia" />
     <MESSAGE value="Prima prova con gas" />
     <MESSAGE value="base acquisizione dati e grafico" />
-    <option name="LAST_COMMIT_MESSAGE" value="base acquisizione dati e grafico" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>218</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Primo tentativo grafico" />
+    <option name="LAST_COMMIT_MESSAGE" value="Primo tentativo grafico" />
   </component>
 </project>
