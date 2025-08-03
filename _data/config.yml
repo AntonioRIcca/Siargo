@@ -1,5 +1,5 @@
 conn:
-  com: COM6
+  com: COM5
   slave: 1
 flux:
   cap: 1000

@@ -139,7 +139,7 @@ class Main:
                 addr = mb_reg[par]['reg'] - 1
                 mb_reg[par]['value'] = results[addr]
 
-                print(par, addr, mb_reg[par]['value'])
+                # print(par, addr, mb_reg[par]['value'])
         else:
             mb_conn = False
 
@@ -247,17 +247,22 @@ class Main:
             self.ui.xrangeSld.setMaximum(int(max(data['time [s]'])))
             self.ui.xrangeSld.setValue(int(self.ui.xrangeDsb.value()))
 
+            try:
+                self.ui.xrangeSld.valueChanged.connect(self.xrange_changed)
+            except:
+                pass
         else:
-
-            self.ui.xposSld.setValue(int(self.ui.xmaxDsb.value()))
             self.ui.xrangeDsb.setValue(self.ui.xmaxDsb.value() - self.ui.xminDsb.value())
+            self.ui.xrangeSld.setValue(int(self.ui.xrangeDsb.value()))
+
+            self.ui.xposSld.setMinimum(int(self.ui.xrangeDsb.value()))
+            self.ui.xposSld.setMaximum(int(max(data['time [s]'])))
+            self.ui.xposSld.setValue(int(self.ui.xmaxDsb.value()))
+
             try:
                 self.ui.xposSld.valueChanged.connect(self.xslide_changed)
             except:
                 pass
-
-        self.ui.xposSld.setMinimum(int(self.ui.xrangeDsb.value()))
-        self.ui.xposSld.setMaximum(int(max(data['time [s]'])))
 
         # xlim = max(max(data['time [s]']), 1)
         ylim = max(max(data['Q_set [Nml/min]']), max(data['Q_read [NmL/min]'])) + 50
@@ -275,6 +280,9 @@ class Main:
         print('Slide cambiato')
         self.ui.xmaxDsb.setValue(self.ui.xposSld.value())
         self.ui.xminDsb.setValue(self.ui.xposSld.value() - self.ui.xrangeDsb.value())
+
+    def xrange_changed(self):
+        self.ui.xrangeDsb.setValue(self.ui.xrangeSld.value())
 
 
     def animate(self, i):

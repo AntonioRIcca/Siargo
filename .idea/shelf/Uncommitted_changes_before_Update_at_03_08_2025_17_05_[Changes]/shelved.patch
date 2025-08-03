@@ -1,0 +1,151 @@
+Index: main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import copy\r\n\r\nimport yaml\r\nfrom pymodbus.client import ModbusSerialClient  # per pymodbus 3.3.x e Python 3.11\r\nfrom mainUi import Ui_MainWindow\r\nfrom PyQt5 import QtWidgets, QtCore, QtGui\r\n\r\nfrom threading import Thread\r\n\r\nimport sys\r\n\r\nimport serial.tools.list_ports\r\n\r\nfrom Utility.variables import instr\r\n\r\nfor port in serial.tools.list_ports.comports():\r\n    print(f'Current port: {port.name}')\r\n# print(list(serial.tools.list_ports.comports()))\r\n\r\nmb_conn = True\r\n\r\nmb_reg = {\r\n    'Function': {\r\n        'reg': 130,\r\n        'desc': 'Product Address',\r\n        'value': 0,\r\n    },\r\n    'Serial number': {\r\n        'reg': 49,\r\n        'desc': 'Serial number of the product',\r\n        'value': 0,\r\n    },\r\n    'Flow rate 1': {\r\n        'reg': 59,\r\n        'desc': 'Serial number of the product',\r\n        'value': 0,\r\n    },\r\n    'Flow rate 2': {\r\n        'reg': 60,\r\n        'desc': 'Serial number of the product',\r\n        'value': 0,\r\n    },\r\n    'Baud rate': {\r\n        'reg': 131,\r\n        'desc': 'Communication baud rate',\r\n        'value': 0,\r\n    },\r\n    'Set point source': {\r\n        'reg': 187,\r\n        'desc': 'Set the setpoint source',\r\n        'value': 0,\r\n    },\r\n    'Set point Flow Code': {\r\n        'reg': 188,\r\n        'desc': 'Set the flow rate in percentage of the full-scale flow',\r\n        'value': 0,\r\n    },\r\n    'Flow1': {\r\n        'reg': 189,\r\n        'desc': 'Read the current flow rate set by the user',\r\n        'value': 0,\r\n    },\r\n    'Flow2': {\r\n        'reg': 190,\r\n        'desc': 'Read the current flow rate set by the user',\r\n        'value': 0,\r\n    },\r\n    'P gain': {\r\n        'reg': 191,\r\n        'desc': 'PD proportional control of the valve/flow rate',\r\n        'value': 0,\r\n    },\r\n    'D gain': {\r\n        'reg': 192,\r\n        'desc': 'PD differential control of the valve/flow rate',\r\n        'value': 0,\r\n    },\r\n    'Valve preload offset': {\r\n        'reg': 193,\r\n        'desc': 'Default or preloaded valve opening',\r\n        'value': 0,\r\n    },\r\n    'Exhaust mode': {\r\n        'reg': 194,\r\n        'desc': 'Set the exhaust mode',\r\n        'value': 0,\r\n    },\r\n    'Exhaust valve': {\r\n        'reg': 195,\r\n        'desc': 'Percentage of the opened valve (Open loop control)',\r\n        'value': 0,\r\n    },\r\n    'Valve status': {\r\n        'reg': 196,\r\n        'desc': 'Percentage of the opened valve',\r\n        'value': 0,\r\n    },\r\n    # 'Offset calibration': {\r\n    #     'reg': 241,\r\n    #     'desc': 'Offset reset or calibration',\r\n    #     'value': 0,\r\n    # },\r\n    # 'Write protection': {\r\n    #     'reg': 256,\r\n    #     'desc': 'Write protection of selected parameters',\r\n    #     'value': 0,\r\n    # },\r\n    'GCF': {\r\n        'reg': 140,\r\n        'desc': 'Write protection of selected parameters',\r\n        'value': 0,\r\n    },\r\n}\r\n\r\n\r\nclass Main:\r\n    def __init__(self):\r\n        self.app = QtWidgets.QApplication(sys.argv)\r\n        self.mainwindow = QtWidgets.QMainWindow()\r\n\r\n        self.mb_conn_par()\r\n\r\n        # self.interface_open()\r\n        f0 = Thread(target=self.interface_open())\r\n        f0.start()\r\n        self.tab_create()\r\n\r\n        pass\r\n\r\n    def interface_open(self):   # Impostazione e apertuda dell'interfaccia\r\n        self.main = Ui_MainWindow()\r\n        self.ui = Ui_MainWindow()\r\n        self.ui.setupUi(self.mainwindow)\r\n\r\n        self.tab_create()\r\n\r\n        if not self.mb_check():\r\n            self.com_selection()\r\n\r\n        self.mb_connect()\r\n\r\n        # -- Definizione delle azioni --------------------------------------------------------------------\r\n        self.ui.refreshPb.clicked.connect(self.tab_refresh)\r\n        self.ui.sendPb.clicked.connect(self.setpoint_set)\r\n        # ------------------------------------------------------------------------------------------------\r\n\r\n        timer = QtCore.QTimer()\r\n        timer.timeout.connect(self.tab_refresh)\r\n        timer.start(1000)\r\n\r\n        self.mainwindow.show()\r\n        self.app.exec()\r\n\r\n    def mb_connect(self):\r\n        self.client = ModbusSerialClient(\r\n            port=instr['conn']['com'],\r\n            startbit=1,\r\n            databits=8,\r\n            parity=\"N\",\r\n            stopbits=2,\r\n            errorcheck=\"crc\",\r\n            baudrate=38400,\r\n            method=\"RTU\",\r\n            timeout=3,\r\n            # unit=31\r\n        )\r\n\r\n    def mb_check(self):\r\n        self.mb_connect()\r\n        try:\r\n            test = self.client.read_holding_registers(address=48, count=1, slave=instr['conn']['slave']).registers[0]\r\n        except:\r\n            test = 0\r\n        self.client.close()\r\n        return test > 0\r\n\r\n    def mb_conn_par(self):\r\n        with open('_data/config.yml') as f:\r\n            cfg = yaml.safe_load(f)\r\n        for p in cfg:\r\n            instr[p] = copy.deepcopy(cfg[p])\r\n\r\n    def mb_reg_read_all(self, lenght=200):\r\n        results = []\r\n        if self.client.connect():  # Connessione al dispositivo\r\n            registers = 250\r\n            addr = 0\r\n            while addr < registers:\r\n                count = min(100, registers-addr)\r\n                results += self.client.read_holding_registers(address=addr,\r\n                                                              count=count,\r\n                                                              slave=instr['conn']['slave']).registers\r\n                addr += count\r\n\r\n            for par in mb_reg:\r\n                addr = mb_reg[par]['reg'] - 1\r\n                mb_reg[par]['value'] = results[addr]\r\n\r\n                print(par, addr, mb_reg[par]['value'])\r\n        else:\r\n            mb_conn = False\r\n\r\n    def tab_create(self):\r\n        for par in mb_reg:\r\n            r = self.ui.regTW.rowCount()\r\n            self.ui.regTW.insertRow(r)\r\n            self.ui.regTW.setItem(r, 0, QtWidgets.QTableWidgetItem(par))\r\n            self.ui.regTW.setItem(r, 1, QtWidgets.QTableWidgetItem(str(mb_reg[par]['reg'])))\r\n            self.ui.regTW.setItem(r, 2, QtWidgets.QTableWidgetItem(str(mb_reg[par]['value'])))\r\n\r\n        print(self.ui.regTW.rowCount())\r\n\r\n    def tab_refresh(self):\r\n        print('refresh')\r\n        self.mb_reg_read_all()\r\n        # print(self.ui.regTW.item(2, 2).text())\r\n        for i in range(len(list(mb_reg.keys()))):\r\n            par = self.ui.regTW.item(i, 0).text()\r\n            print(i, par, mb_reg[par]['value'])\r\n            self.ui.regTW.item(i, 2).setText(str(mb_reg[par]['value']))\r\n\r\n        self.ui.flowRateDsb.setValue((mb_reg['Flow rate 1']['value'] * 65536 + mb_reg['Flow rate 2']['value']) / 1000)\r\n        self.ui.flowReadDsb.setValue((mb_reg['Flow1']['value'] * 65536 + mb_reg['Flow2']['value']) / 1000)\r\n\r\n    def setpoint_set(self):\r\n        if self.client.connect():  # Connessione al dispositivo\r\n            value = self.ui.flowSetDsb.value() / 1000 * 64000\r\n            self.client.write_register(slave=instr['conn']['slave'], address=187, value=int(value))\r\n\r\n    def com_selection(self):\r\n        self.client.close()\r\n\r\n        from Utility.COM.com import Com\r\n        self.comsel = Com()\r\n        self.comsel.show()\r\n        self.comsel.exec_()\r\n\r\n\r\n    def dopo(self):\r\n        if client.connect():  # Connessione al dispositivo\r\n            registers = 250\r\n            results = []\r\n            addr = 0\r\n            while addr < registers:\r\n                count = min(100, registers-addr)\r\n                results += client.read_holding_registers(address=addr, count=count, slave=1).registers\r\n                addr += count\r\n\r\n        else:\r\n            mb_conn = False\r\n\r\n        # print(mb_conn)\r\n        # print(results)\r\n        # print(len(results))\r\n\r\n        for par in mb_reg:\r\n            addr = mb_reg[par]['reg'] - 1\r\n            mb_reg[par]['value'] = results[addr]\r\n\r\n            print(par, addr, mb_reg[par]['value'])\r\n\r\n\r\n        if client.connect():  # Connessione al dispositivo\r\n            client.write_register(slave=1, address=187, value=int(0.0*64000))\r\n\r\n        if client.connect():  # Connessione al dispositivo\r\n            registers = 250\r\n            results = []\r\n            addr = 0\r\n            while addr < registers:\r\n                count = min(100, registers-addr)\r\n                results += client.read_holding_registers(address=addr, count=count, slave=1).registers\r\n                addr += count\r\n        else:\r\n            mb_conn = False\r\n\r\n        for par in mb_reg:\r\n            addr = mb_reg[par]['reg'] - 1\r\n            mb_reg[par]['value'] = results[addr]\r\n\r\n            print(par, addr, mb_reg[par]['value'])\r\n\r\n\r\nMain()
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/main.py b/main.py
+--- a/main.py	(revision d4a661fdf8ff8cab1173161f640d56b5d3a40c7e)
++++ b/main.py	(date 1753451843115)
+@@ -146,7 +146,7 @@
+ 
+         timer = QtCore.QTimer()
+         timer.timeout.connect(self.tab_refresh)
+-        timer.start(1000)
++        timer.start(200)
+ 
+         self.mainwindow.show()
+         self.app.exec()
+@@ -196,7 +196,7 @@
+                 addr = mb_reg[par]['reg'] - 1
+                 mb_reg[par]['value'] = results[addr]
+ 
+-                print(par, addr, mb_reg[par]['value'])
++                # print(par, addr, mb_reg[par]['value'])
+         else:
+             mb_conn = False
+ 
+@@ -216,7 +216,7 @@
+         # print(self.ui.regTW.item(2, 2).text())
+         for i in range(len(list(mb_reg.keys()))):
+             par = self.ui.regTW.item(i, 0).text()
+-            print(i, par, mb_reg[par]['value'])
++            # print(i, par, mb_reg[par]['value'])
+             self.ui.regTW.item(i, 2).setText(str(mb_reg[par]['value']))
+ 
+         self.ui.flowRateDsb.setValue((mb_reg['Flow rate 1']['value'] * 65536 + mb_reg['Flow rate 2']['value']) / 1000)
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"ddd04687-eb32-4bb0-80f8-f31b715f311f\" name=\"Changes\" comment=\"Prima interfaccia\">\r\n      <change afterPath=\"$PROJECT_DIR$/Utility/COM/com.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/main.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/main.py\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 6\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"30JLOuK1R2JHT2SIyFwVh5wYTNh\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Python.Test.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.main.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.test.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/anton/PycharmProjects/Siargo&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\anton\\PycharmProjects\\Siargo\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"main\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Siargo\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/main.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Python.main\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-python-sdk-0509580d9d50-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.14494.241\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"ddd04687-eb32-4bb0-80f8-f31b715f311f\" name=\"Changes\" comment=\"\" />\r\n      <created>1753340700115</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1753340700115</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Start\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1753359531126</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1753359531126</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Prima interfaccia\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1753374491729</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1753374491729</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Start\" />\r\n    <MESSAGE value=\"Prima interfaccia\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Prima interfaccia\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision d4a661fdf8ff8cab1173161f640d56b5d3a40c7e)
++++ b/.idea/workspace.xml	(date 1754233498033)
+@@ -4,9 +4,9 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="ddd04687-eb32-4bb0-80f8-f31b715f311f" name="Changes" comment="Prima interfaccia">
+-      <change afterPath="$PROJECT_DIR$/Utility/COM/com.py" afterDir="false" />
++    <list default="true" id="ddd04687-eb32-4bb0-80f8-f31b715f311f" name="Changes" comment="Start">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/_data/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_data/config.yml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -24,11 +24,22 @@
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
++  <component name="GitHubPullRequestSearchHistory">{
++  &quot;lastFilter&quot;: {
++    &quot;state&quot;: &quot;OPEN&quot;,
++    &quot;assignee&quot;: &quot;AntonioRIcca&quot;
++  }
++}</component>
++  <component name="GithubPullRequestsUISettings">{
++  &quot;selectedUrlAndAccountId&quot;: {
++    &quot;url&quot;: &quot;https://github.com/AntonioRIcca/Siargo.git&quot;,
++    &quot;accountId&quot;: &quot;b12845d9-078e-41a6-a65c-8d0a97b0646e&quot;
++  }
++}</component>
+   <component name="ProjectColorInfo">{
+   &quot;associatedIndex&quot;: 6
+ }</component>
+   <component name="ProjectId" id="30JLOuK1R2JHT2SIyFwVh5wYTNh" />
+-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+@@ -39,6 +50,7 @@
+     &quot;Python.main.executor&quot;: &quot;Run&quot;,
+     &quot;Python.test.executor&quot;: &quot;Run&quot;,
+     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+     &quot;last_opened_file_path&quot;: &quot;C:/Users/anton/PycharmProjects/Siargo&quot;,
+     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+@@ -81,7 +93,7 @@
+   <component name="SharedIndexes">
+     <attachedChunks>
+       <set>
+-        <option value="bundled-python-sdk-0509580d9d50-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.14494.241" />
++        <option value="bundled-python-sdk-4c141bd692a7-e2d783800521-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.26927.90" />
+       </set>
+     </attachedChunks>
+   </component>
+@@ -102,20 +114,21 @@
+       <option name="project" value="LOCAL" />
+       <updated>1753359531126</updated>
+     </task>
+-    <task id="LOCAL-00002" summary="Prima interfaccia">
+-      <option name="closed" value="true" />
+-      <created>1753374491729</created>
+-      <option name="number" value="00002" />
+-      <option name="presentableId" value="LOCAL-00002" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1753374491729</updated>
+-    </task>
+-    <option name="localTasksCounter" value="3" />
++    <option name="localTasksCounter" value="2" />
+     <servers />
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="Start" />
+-    <MESSAGE value="Prima interfaccia" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Prima interfaccia" />
++    <option name="LAST_COMMIT_MESSAGE" value="Start" />
++  </component>
++  <component name="XDebuggerManager">
++    <breakpoint-manager>
++      <breakpoints>
++        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
++          <url>file://$PROJECT_DIR$/Utility/COM/com.py</url>
++          <option name="timeStamp" value="2" />
++        </line-breakpoint>
++      </breakpoints>
++    </breakpoint-manager>
+   </component>
+ </project>
+\ No newline at end of file
+Index: _data/config.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>conn:\r\n  com: COM6\r\n  slave: 1\r\nflux:\r\n  cap: 1000\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/_data/config.yml b/_data/config.yml
+--- a/_data/config.yml	(revision d4a661fdf8ff8cab1173161f640d56b5d3a40c7e)
++++ b/_data/config.yml	(date 1753449416078)
+@@ -1,5 +1,5 @@
+ conn:
+-  com: COM6
++  com: COM5
+   slave: 1
+ flux:
+   cap: 1000
