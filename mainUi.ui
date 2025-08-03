@@ -291,10 +291,13 @@
      </rect>
     </property>
     <property name="maximum">
+     <number>99990</number>
+    </property>
+    <property name="singleStep">
      <number>10</number>
     </property>
     <property name="pageStep">
-     <number>1001</number>
+     <number>1000</number>
     </property>
     <property name="value">
      <number>10</number>
