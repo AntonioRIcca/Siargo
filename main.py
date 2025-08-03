@@ -271,7 +271,6 @@ class Main:
                            right=self.ui.xmaxDsb.value())
         self.ax_Q.set_ylim(top=ylim)
 
-
         self.graph_canvas.draw()
         self.graph_canvas.flush_events()
         pass
