@@ -321,6 +321,9 @@
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
+    <property name="maximum">
+     <double>9999.989999999999782</double>
+    </property>
    </widget>
    <widget class="QDoubleSpinBox" name="xmaxDsb">
     <property name="geometry">
@@ -334,6 +337,9 @@
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
+    <property name="maximum">
+     <double>9999.989999999999782</double>
+    </property>
     <property name="value">
      <double>10.000000000000000</double>
     </property>
@@ -346,6 +352,9 @@
       <width>440</width>
       <height>25</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <number>9999998</number>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -390,6 +399,9 @@
     </property>
     <property name="decimals">
      <number>1</number>
+    </property>
+    <property name="maximum">
+     <double>10000.000000000000000</double>
     </property>
     <property name="value">
      <double>10.000000000000000</double>

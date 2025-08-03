@@ -89,7 +89,7 @@ class Main:
 
         timer = QtCore.QTimer()
         timer.timeout.connect(self.refresh)
-        timer.start(1000)
+        timer.start(200)
 
         self.mainwindow.show()
         self.app.exec()
@@ -224,22 +224,39 @@ class Main:
 
         self.ui.xminDsb.setEnabled(not self.ui.xautorangePb.isChecked())
         self.ui.xmaxDsb.setEnabled(not self.ui.xautorangePb.isChecked())
+        self.ui.xposSld.setEnabled(not self.ui.xautorangePb.isChecked())
+
+        self.ui.xrangeDsb.setEnabled(self.ui.xautorangePb.isChecked())
+        self.ui.xrangeSld.setEnabled(self.ui.xautorangePb.isChecked())
+
+        try:
+            self.ui.xposSld.valueChanged.disconnect()
+        except:
+            pass
+
+        try:
+            self.ui.xrangeSld.valueChanged.disconnect()
+        except:
+            pass
 
         if self.ui.xautorangePb.isChecked():
             self.ui.xminDsb.setValue(max(0, max(data['time [s]']) - self.ui.xrangeDsb.value()))
             self.ui.xmaxDsb.setValue(max(max(data['time [s]']), 1))
-            try:
-                self.ui.xposSld.valueChanged.disconnect()
-            except:
-                pass
+            self.ui.xposSld.setValue(int(self.ui.xmaxDsb.value()))
+
+            self.ui.xrangeSld.setMaximum(int(max(data['time [s]'])))
+            self.ui.xrangeSld.setValue(int(self.ui.xrangeDsb.value()))
+
         else:
+
+            self.ui.xposSld.setValue(int(self.ui.xmaxDsb.value()))
+            self.ui.xrangeDsb.setValue(self.ui.xmaxDsb.value() - self.ui.xminDsb.value())
             try:
                 self.ui.xposSld.valueChanged.connect(self.xslide_changed)
-                self.ui.xposSld.setValue(int(self.ui.xmaxDsb.value()))
             except:
                 pass
 
-        self.ui.xposSld.setMinimum(int(max(data['time [s]']) - self.ui.xrangeDsb.value()))
+        self.ui.xposSld.setMinimum(int(self.ui.xrangeDsb.value()))
         self.ui.xposSld.setMaximum(int(max(data['time [s]'])))
 
         # xlim = max(max(data['time [s]']), 1)
