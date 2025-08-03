@@ -285,8 +285,17 @@
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
+    <property name="buttonSymbols">
+     <enum>QAbstractSpinBox::NoButtons</enum>
+    </property>
+    <property name="suffix">
+     <string/>
+    </property>
+    <property name="decimals">
+     <number>0</number>
+    </property>
     <property name="maximum">
-     <double>9999.989999999999782</double>
+     <double>10000.000000000000000</double>
     </property>
     <property name="value">
      <double>10.000000000000000</double>
@@ -304,8 +313,17 @@
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
+    <property name="buttonSymbols">
+     <enum>QAbstractSpinBox::NoButtons</enum>
+    </property>
+    <property name="suffix">
+     <string/>
+    </property>
+    <property name="decimals">
+     <number>0</number>
+    </property>
     <property name="maximum">
-     <double>9999.989999999999782</double>
+     <double>10000.000000000000000</double>
     </property>
    </widget>
    <widget class="QSlider" name="xposSld">
@@ -330,7 +348,7 @@
      <number>0</number>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="xminDsb_2">
+   <widget class="QDoubleSpinBox" name="yminDsb">
     <property name="geometry">
      <rect>
       <x>360</x>
@@ -339,11 +357,30 @@
       <height>25</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
+    <property name="buttonSymbols">
+     <enum>QAbstractSpinBox::NoButtons</enum>
+    </property>
+    <property name="suffix">
+     <string/>
+    </property>
+    <property name="decimals">
+     <number>0</number>
+    </property>
     <property name="maximum">
-     <double>9999.989999999999782</double>
+     <double>2000.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>50.000000000000000</double>
     </property>
    </widget>
    <widget class="QDoubleSpinBox" name="xrangeDsb">
@@ -358,8 +395,14 @@
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
+    <property name="buttonSymbols">
+     <enum>QAbstractSpinBox::NoButtons</enum>
+    </property>
+    <property name="suffix">
+     <string> min</string>
+    </property>
     <property name="decimals">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="maximum">
      <double>10000.000000000000000</double>
@@ -399,20 +442,39 @@
      <number>0</number>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="xminDsb_3">
+   <widget class="QDoubleSpinBox" name="ymaxDsb">
     <property name="geometry">
      <rect>
       <x>360</x>
-      <y>55</y>
+      <y>45</y>
       <width>71</width>
       <height>25</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
+    <property name="buttonSymbols">
+     <enum>QAbstractSpinBox::NoButtons</enum>
+    </property>
+    <property name="suffix">
+     <string/>
+    </property>
+    <property name="decimals">
+     <number>0</number>
+    </property>
     <property name="maximum">
-     <double>9999.989999999999782</double>
+     <double>2000.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>50.000000000000000</double>
     </property>
    </widget>
    <widget class="QWidget" name="graphMainWgt" native="true">
@@ -442,11 +504,11 @@
      </property>
     </layout>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="yautorangePb">
     <property name="geometry">
      <rect>
       <x>360</x>
-      <y>25</y>
+      <y>15</y>
       <width>70</width>
       <height>25</height>
      </rect>
@@ -478,11 +540,11 @@
    <zorder>xmaxDsb</zorder>
    <zorder>xminDsb</zorder>
    <zorder>xposSld</zorder>
-   <zorder>xminDsb_2</zorder>
+   <zorder>yminDsb</zorder>
    <zorder>xrangeDsb</zorder>
    <zorder>xrangeSld</zorder>
-   <zorder>xminDsb_3</zorder>
-   <zorder>pushButton</zorder>
+   <zorder>ymaxDsb</zorder>
+   <zorder>yautorangePb</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

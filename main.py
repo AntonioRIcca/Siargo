@@ -222,6 +222,16 @@ class Main:
         self.line_Qset.set_ydata(data['Q_set [Nml/min]'])
         self.line_Qread.set_ydata(data['Q_read [NmL/min]'])
 
+        # xlim = max(max(data['time [s]']), 1)
+
+        self.x_axis_manager(data)
+        self.y_axis_manager(data)
+
+        self.graph_canvas.draw()
+        self.graph_canvas.flush_events()
+        pass
+
+    def x_axis_manager(self, data):
         self.ui.xminDsb.setEnabled(not self.ui.xautorangePb.isChecked())
         self.ui.xmaxDsb.setEnabled(not self.ui.xautorangePb.isChecked())
         self.ui.xposSld.setEnabled(not self.ui.xautorangePb.isChecked())
@@ -264,16 +274,8 @@ class Main:
             except:
                 pass
 
-        # xlim = max(max(data['time [s]']), 1)
-        ylim = max(max(data['Q_set [Nml/min]']), max(data['Q_read [NmL/min]'])) + 50
-
         self.ax_Q.set_xlim(left=self.ui.xminDsb.value(),
                            right=self.ui.xmaxDsb.value())
-        self.ax_Q.set_ylim(top=ylim)
-
-        self.graph_canvas.draw()
-        self.graph_canvas.flush_events()
-        pass
 
     def xslide_changed(self):
         print('Slide cambiato')
@@ -283,6 +285,26 @@ class Main:
     def xrange_changed(self):
         self.ui.xrangeDsb.setValue(self.ui.xrangeSld.value())
 
+    def y_axis_manager(self, data):
+        # self.ui.yminDsb.setEnabled(not self.ui.yautorangePb.isChecked())
+        # self.ui.ymaxDsb.setEnabled(not self.ui.yautorangePb.isChecked())
+        self.ui.yminDsb.setReadOnly(self.ui.yautorangePb.isChecked())
+        self.ui.ymaxDsb.setReadOnly(self.ui.yautorangePb.isChecked())
+
+        self.ui.yminDsb.setMinimum(0)
+        self.ui.yminDsb.setMaximum(self.ui.ymaxDsb.value() - 1)
+        self.ui.ymaxDsb.setMinimum(self.ui.yminDsb.value() + 1)
+
+        if self.ui.yautorangePb.isChecked():
+            y_max = max(max(data['Q_set [Nml/min]']), max(data['Q_read [NmL/min]'])) + 50
+            y_min = 0
+            self.ui.yminDsb.setValue(0)
+            self.ui.ymaxDsb.setValue(y_max)
+        else:
+            y_min = self.ui.yminDsb.value()
+            y_max = self.ui.ymaxDsb.value()
+
+        self.ax_Q.set_ylim(bottom=y_min, top=y_max)
 
     def animate(self, i):
         data = pd.read_csv('Utility/data.csv')

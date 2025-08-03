@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddd04687-eb32-4bb0-80f8-f31b715f311f" name="Changes" comment="work in progress, slide bars">
+    <list default="true" id="ddd04687-eb32-4bb0-80f8-f31b715f311f" name="Changes" comment="Regolazione verticale: work in progress">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_data/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/_data/data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
@@ -212,7 +212,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754219775776</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Regolazione verticale: work in progress">
+      <option name="closed" value="true" />
+      <created>1754243112102</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1754243112102</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -234,6 +242,7 @@
     <MESSAGE value="Primo tentativo grafico" />
     <MESSAGE value="wok in progress, slide bars" />
     <MESSAGE value="work in progress, slide bars" />
-    <option name="LAST_COMMIT_MESSAGE" value="work in progress, slide bars" />
+    <MESSAGE value="Regolazione verticale: work in progress" />
+    <option name="LAST_COMMIT_MESSAGE" value="Regolazione verticale: work in progress" />
   </component>
 </project>
