@@ -178,7 +178,7 @@ class Main:
     def refresh(self):
         if self.ui.fakeCkb.isChecked():
             self.ui.flowRateDsb.setValue(self.ui.fake_flowReadDsb.value())
-            print('Fake read', self.ui.fake_flowReadDsb.value())
+            # print('Fake read', self.ui.fake_flowReadDsb.value())
         else:
             self.ui.flowRateDsb.setValue(
                 (mb_reg['Flow rate 1']['value'] * 65536 + mb_reg['Flow rate 2']['value']) / 1000)
@@ -194,7 +194,7 @@ class Main:
             csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
 
             line = {
-                'time [s]': (time.perf_counter() - self.start_t) / 1,   #TODO: deve diventare 60
+                'time [s]': (time.perf_counter() - self.start_t) / 60,
                 'Q_set [Nml/min]': self.ui.flowSetDsb.value(),
                 'Q_read [NmL/min]': self.ui.flowRateDsb.value()
             }
@@ -217,6 +217,32 @@ class Main:
 
     def graph_update(self):
         data = pd.read_csv('_data/data.csv')
+
+        # print(list(data['Q_set [Nml/min]']))
+
+        # length = len(data['time [s]'])
+        #
+        # i_start, i_end = 0, length
+        # for i in range(0, length):
+        #     if list(data['time [s]'])[i] >= self.ui.xminDsb.value():
+        #         i_start = i
+        #         break
+        # for i in range (i_start, length):
+        #     if list(data['time [s]'])[i] >= self.ui.xmaxDsb.value():
+        #         i_end = i
+        #         break
+        #
+        # data_red = {
+        #     'time [s]': list(data['time [s]'])[i_start:i_end],
+        #     'Q_set [Nml/min]': list(data['Q_set [Nml/min]'])[i_start:i_end],
+        #     'Q_read [NmL/min]': list(data['Q_read [NmL/min]'])[i_start:i_end],
+        # }
+        #
+        # print('length:', length,'start:', i_start, 'end:', i_end)
+        # # print('l1:', len(data), 'l2', len(data_red))
+
+
+
         self.line_Qset.set_xdata(data['time [s]'])
         self.line_Qread.set_xdata(data['time [s]'])
         self.line_Qset.set_ydata(data['Q_set [Nml/min]'])
@@ -278,7 +304,7 @@ class Main:
                            right=self.ui.xmaxDsb.value())
 
     def xslide_changed(self):
-        print('Slide cambiato')
+        # print('Slide cambiato')
         self.ui.xmaxDsb.setValue(self.ui.xposSld.value())
         self.ui.xminDsb.setValue(self.ui.xposSld.value() - self.ui.xrangeDsb.value())
 
@@ -286,8 +312,6 @@ class Main:
         self.ui.xrangeDsb.setValue(self.ui.xrangeSld.value())
 
     def y_axis_manager(self, data):
-        # self.ui.yminDsb.setEnabled(not self.ui.yautorangePb.isChecked())
-        # self.ui.ymaxDsb.setEnabled(not self.ui.yautorangePb.isChecked())
         self.ui.yminDsb.setReadOnly(self.ui.yautorangePb.isChecked())
         self.ui.ymaxDsb.setReadOnly(self.ui.yautorangePb.isChecked())
 
@@ -311,8 +335,6 @@ class Main:
         x = data['time [s]']
         y1 = data['Q_set [Nml/min]']
         y2 = data['Q_read [NmL/min']
-
-        print(y2)
 
         plt.cla()
 
