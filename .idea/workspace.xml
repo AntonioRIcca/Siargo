@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddd04687-eb32-4bb0-80f8-f31b715f311f" name="Changes" comment="Regolazione verticale: completa&#10;Manca la parzializzazione dei dati (se necessaria)">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_08_2025_17_05_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_08_2025_17_05__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_08_2025_18_36_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_08_2025_18_36__Changes_.xml" beforeDir="false" />
+    <list default="true" id="ddd04687-eb32-4bb0-80f8-f31b715f311f" name="Changes" comment="inizio modifica grafica">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_data/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/_data/data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainUi.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainUi.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainUi.ui" beforeDir="false" afterPath="$PROJECT_DIR$/mainUi.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -231,7 +227,23 @@
       <option name="project" value="LOCAL" />
       <updated>1754251859225</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="inizio modifica grafica">
+      <option name="closed" value="true" />
+      <created>1755541423398</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1755541423398</updated>
+    </task>
+    <task id="LOCAL-00011" summary="inizio modifica grafica">
+      <option name="closed" value="true" />
+      <created>1755541428881</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1755541428881</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -255,7 +267,8 @@
     <MESSAGE value="work in progress, slide bars" />
     <MESSAGE value="Regolazione verticale: work in progress" />
     <MESSAGE value="Regolazione verticale: completa&#10;Manca la parzializzazione dei dati (se necessaria)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Regolazione verticale: completa&#10;Manca la parzializzazione dei dati (se necessaria)" />
+    <MESSAGE value="inizio modifica grafica" />
+    <option name="LAST_COMMIT_MESSAGE" value="inizio modifica grafica" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -164,7 +164,7 @@ class Main:
 
     def setpoint_set(self):
         if self.client.connect():  # Connessione al dispositivo
-            value = self.ui.flowSetDsb.value() / 1000 * 64000
+            value = self.ui.setFlowDsb.value() / 1000 * 64000
             self.client.write_register(slave=instr['conn']['slave'], address=187, value=int(value))
 
     def com_selection(self):
@@ -177,12 +177,12 @@ class Main:
 
     def refresh(self):
         if self.ui.fakeCkb.isChecked():
-            self.ui.flowRateDsb.setValue(self.ui.fake_flowReadDsb.value())
+            self.ui.readFlowDsb.setValue(self.ui.fake_flowReadDsb.value())
             # print('Fake read', self.ui.fake_flowReadDsb.value())
         else:
-            self.ui.flowRateDsb.setValue(
+            self.ui.readFlowDsb.setValue(
                 (mb_reg['Flow rate 1']['value'] * 65536 + mb_reg['Flow rate 2']['value']) / 1000)
-            self.ui.flowReadDsb.setValue((mb_reg['Flow1']['value'] * 65536 + mb_reg['Flow2']['value']) / 1000)
+            self.ui.readPercDsb.setValue((mb_reg['Flow1']['value'] * 65536 + mb_reg['Flow2']['value']) / 1000)
         self.tab_refresh()
         self.data_storage()
         self.graph_update()
@@ -195,8 +195,8 @@ class Main:
 
             line = {
                 'time [s]': (time.perf_counter() - self.start_t) / 60,
-                'Q_set [Nml/min]': self.ui.flowSetDsb.value(),
-                'Q_read [NmL/min]': self.ui.flowRateDsb.value()
+                'Q_set [Nml/min]': self.ui.setFlowDsb.value(),
+                'Q_read [NmL/min]': self.ui.readFlowDsb.value()
             }
 
             csv_writer.writerow(line)

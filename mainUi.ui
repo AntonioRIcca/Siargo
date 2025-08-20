@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1464</width>
-    <height>1251</height>
+    <width>350</width>
+    <height>250</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,10 +28,10 @@ QProgressBar::chunk {
    <widget class="QTableWidget" name="regTW">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>590</y>
-      <width>321</width>
-      <height>311</height>
+      <x>10</x>
+      <y>270</y>
+      <width>300</width>
+      <height>210</height>
      </rect>
     </property>
     <column>
@@ -53,9 +53,9 @@ QProgressBar::chunk {
    <widget class="QPushButton" name="refreshPb">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>180</y>
-      <width>75</width>
+      <x>230</x>
+      <y>190</y>
+      <width>80</width>
       <height>23</height>
      </rect>
     </property>
@@ -63,12 +63,12 @@ QProgressBar::chunk {
      <string>Refresh</string>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="flowSetDsb">
+   <widget class="QDoubleSpinBox" name="setFlowDsb">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>210</y>
-      <width>140</width>
+      <x>150</x>
+      <y>90</y>
+      <width>100</width>
       <height>25</height>
      </rect>
     </property>
@@ -88,28 +88,31 @@ QProgressBar::chunk {
      <double>50.000000000000000</double>
     </property>
     <property name="value">
-     <double>0.000000000000000</double>
+     <double>1000.000000000000000</double>
     </property>
    </widget>
-   <widget class="QLabel" name="flowSetLbl">
+   <widget class="QLabel" name="setLbl">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>210</y>
-      <width>70</width>
+      <x>110</x>
+      <y>90</y>
+      <width>30</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
      <string>Set</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
    </widget>
    <widget class="QPushButton" name="sendPb">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>210</y>
-      <width>75</width>
+      <x>150</x>
+      <y>190</y>
+      <width>80</width>
       <height>23</height>
      </rect>
     </property>
@@ -117,12 +120,12 @@ QProgressBar::chunk {
      <string>Send</string>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="flowReadDsb">
+   <widget class="QDoubleSpinBox" name="setPercDsb">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>180</y>
-      <width>140</width>
+      <x>250</x>
+      <y>90</y>
+      <width>60</width>
       <height>25</height>
      </rect>
     </property>
@@ -148,28 +151,31 @@ QProgressBar::chunk {
      <double>50.000000000000000</double>
     </property>
     <property name="value">
-     <double>0.000000000000000</double>
+     <double>100.000000000000000</double>
     </property>
    </widget>
-   <widget class="QLabel" name="flowReadLbl">
+   <widget class="QLabel" name="readLbl">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>180</y>
-      <width>70</width>
+      <x>110</x>
+      <y>160</y>
+      <width>30</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
      <string>Read</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="flowRateDsb">
+   <widget class="QDoubleSpinBox" name="readFlowDsb">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>240</y>
-      <width>140</width>
+      <x>150</x>
+      <y>160</y>
+      <width>100</width>
       <height>25</height>
      </rect>
     </property>
@@ -198,38 +204,12 @@ QProgressBar::chunk {
      <double>0.000000000000000</double>
     </property>
    </widget>
-   <widget class="QLabel" name="flowRateLbl">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>240</y>
-      <width>70</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Flow Rate</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="fake_flowReadLbl">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>320</y>
-      <width>70</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Fake Read</string>
-    </property>
-   </widget>
    <widget class="QDoubleSpinBox" name="fake_flowReadDsb">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>320</y>
-      <width>140</width>
+      <x>210</x>
+      <y>220</y>
+      <width>101</width>
       <height>25</height>
      </rect>
     </property>
@@ -255,8 +235,8 @@ QProgressBar::chunk {
    <widget class="QCheckBox" name="fakeCkb">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>330</y>
+      <x>20</x>
+      <y>220</y>
       <width>70</width>
       <height>17</height>
      </rect>
@@ -268,8 +248,8 @@ QProgressBar::chunk {
    <widget class="QPushButton" name="xautorangePb">
     <property name="geometry">
      <rect>
-      <x>920</x>
-      <y>465</y>
+      <x>900</x>
+      <y>455</y>
       <width>70</width>
       <height>25</height>
      </rect>
@@ -287,8 +267,8 @@ QProgressBar::chunk {
    <widget class="QDoubleSpinBox" name="xmaxDsb">
     <property name="geometry">
      <rect>
-      <x>920</x>
-      <y>425</y>
+      <x>900</x>
+      <y>415</y>
       <width>70</width>
       <height>25</height>
      </rect>
@@ -315,8 +295,8 @@ QProgressBar::chunk {
    <widget class="QDoubleSpinBox" name="xminDsb">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>425</y>
+      <x>380</x>
+      <y>415</y>
       <width>70</width>
       <height>25</height>
      </rect>
@@ -340,8 +320,8 @@ QProgressBar::chunk {
    <widget class="QSlider" name="xposSld">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>425</y>
+      <x>450</x>
+      <y>415</y>
       <width>440</width>
       <height>25</height>
      </rect>
@@ -362,8 +342,8 @@ QProgressBar::chunk {
    <widget class="QDoubleSpinBox" name="yminDsb">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>357</y>
+      <x>370</x>
+      <y>347</y>
       <width>70</width>
       <height>25</height>
      </rect>
@@ -397,8 +377,8 @@ QProgressBar::chunk {
    <widget class="QDoubleSpinBox" name="xrangeDsb">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>465</y>
+      <x>380</x>
+      <y>455</y>
       <width>70</width>
       <height>25</height>
      </rect>
@@ -425,8 +405,8 @@ QProgressBar::chunk {
    <widget class="QSlider" name="xrangeSld">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>465</y>
+      <x>450</x>
+      <y>455</y>
       <width>440</width>
       <height>25</height>
      </rect>
@@ -456,8 +436,8 @@ QProgressBar::chunk {
    <widget class="QDoubleSpinBox" name="ymaxDsb">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>50</y>
+      <x>370</x>
+      <y>40</y>
       <width>71</width>
       <height>25</height>
      </rect>
@@ -491,8 +471,8 @@ QProgressBar::chunk {
    <widget class="QWidget" name="graphMainWgt" native="true">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>15</y>
+      <x>370</x>
+      <y>5</y>
       <width>600</width>
       <height>400</height>
      </rect>
@@ -518,8 +498,8 @@ QProgressBar::chunk {
    <widget class="QPushButton" name="yautorangePb">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>20</y>
+      <x>370</x>
+      <y>10</y>
       <width>70</width>
       <height>25</height>
      </rect>
@@ -534,11 +514,11 @@ QProgressBar::chunk {
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="rightExpandPb">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>582</y>
+      <x>320</x>
+      <y>100</y>
       <width>20</width>
       <height>60</height>
      </rect>
@@ -553,12 +533,12 @@ QProgressBar::chunk {
      <string>&gt;</string>
     </property>
    </widget>
-   <widget class="QProgressBar" name="progressBar">
+   <widget class="QProgressBar" name="setPrB">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>390</y>
-      <width>200</width>
+      <x>150</x>
+      <y>120</y>
+      <width>160</width>
       <height>15</height>
      </rect>
     </property>
@@ -572,11 +552,11 @@ QProgressBar::chunk {
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="topImgLbl">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>20</y>
+      <x>10</x>
+      <y>10</y>
       <width>300</width>
       <height>50</height>
      </rect>
@@ -588,17 +568,103 @@ QProgressBar::chunk {
      <pixmap>img/banner_300x50.png</pixmap>
     </property>
    </widget>
+   <widget class="QLabel" name="mfcImgLbl">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>img/mfc_100x100.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QProgressBar" name="readPrB">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>140</y>
+      <width>160</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="value">
+     <number>24</number>
+    </property>
+    <property name="textVisible">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="downExpandPb">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>220</y>
+      <width>60</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>V</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="readPercDsb">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>160</y>
+      <width>60</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(216, 216, 216);</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="buttonSymbols">
+     <enum>QAbstractSpinBox::NoButtons</enum>
+    </property>
+    <property name="suffix">
+     <string>%</string>
+    </property>
+    <property name="maximum">
+     <double>9999.989999999999782</double>
+    </property>
+    <property name="singleStep">
+     <double>50.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>100.000000000000000</double>
+    </property>
+   </widget>
    <zorder>graphMainWgt</zorder>
    <zorder>regTW</zorder>
    <zorder>refreshPb</zorder>
-   <zorder>flowSetDsb</zorder>
-   <zorder>flowSetLbl</zorder>
+   <zorder>setFlowDsb</zorder>
+   <zorder>setLbl</zorder>
    <zorder>sendPb</zorder>
-   <zorder>flowReadDsb</zorder>
-   <zorder>flowReadLbl</zorder>
-   <zorder>flowRateDsb</zorder>
-   <zorder>flowRateLbl</zorder>
-   <zorder>fake_flowReadLbl</zorder>
+   <zorder>setPercDsb</zorder>
+   <zorder>readLbl</zorder>
+   <zorder>readFlowDsb</zorder>
    <zorder>fake_flowReadDsb</zorder>
    <zorder>fakeCkb</zorder>
    <zorder>xautorangePb</zorder>
@@ -610,21 +676,14 @@ QProgressBar::chunk {
    <zorder>xrangeSld</zorder>
    <zorder>ymaxDsb</zorder>
    <zorder>yautorangePb</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>progressBar</zorder>
-   <zorder>label</zorder>
+   <zorder>rightExpandPb</zorder>
+   <zorder>setPrB</zorder>
+   <zorder>topImgLbl</zorder>
+   <zorder>mfcImgLbl</zorder>
+   <zorder>readPrB</zorder>
+   <zorder>downExpandPb</zorder>
+   <zorder>readPercDsb</zorder>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1464</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
