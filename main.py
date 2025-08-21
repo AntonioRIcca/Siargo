@@ -21,7 +21,7 @@ import os
 
 import serial.tools.list_ports
 
-from Utility.variables import instr, mb_reg
+from Utility.variables import instr, mb_reg, par
 
 for port in serial.tools.list_ports.comports():
     print(f'Current port: {port.name}')
@@ -85,6 +85,9 @@ class Main:
         # -- Definizione delle azioni --------------------------------------------------------------------
         self.ui.refreshPb.clicked.connect(self.tab_refresh)
         self.ui.sendPb.clicked.connect(self.setpoint_set)
+        self.ui.setFlowDsb.lineEdit().returnPressed.connect(self.setpoint_set)
+        self.ui.rightExpandPb.clicked.connect(self.right_expand)
+        self.ui.downExpandPb.clicked.connect(self.down_expand)
         # ------------------------------------------------------------------------------------------------
 
         timer = QtCore.QTimer()
@@ -163,6 +166,8 @@ class Main:
             self.ui.regTW.item(i, 2).setText(str(mb_reg[par]['value']))
 
     def setpoint_set(self):
+        par['set'] = self.ui.setFlowDsb.value()
+        print('par_set:', par['set'])
         if self.client.connect():  # Connessione al dispositivo
             value = self.ui.setFlowDsb.value() / 1000 * 64000
             self.client.write_register(slave=instr['conn']['slave'], address=187, value=int(value))
@@ -194,12 +199,32 @@ class Main:
             csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
 
             line = {
-                'time [s]': (time.perf_counter() - self.start_t) / 60,
-                'Q_set [Nml/min]': self.ui.setFlowDsb.value(),
-                'Q_read [NmL/min]': self.ui.readFlowDsb.value()
+                'time [s]': (time.perf_counter() - self.start_t) / 10,
+                'Q_set [Nml/min]': par['set'],
+                'Q_read [NmL/min]': par['read']
             }
 
             csv_writer.writerow(line)
+
+    def right_expand(self):
+        if par['right_expanded']:
+            self.mainwindow.resize(350, 250)
+            self.ui.rightExpandPb.setText('>')
+        else:
+            self.mainwindow.resize(1000, 500)
+            # self.mainwindow.move(10,10)
+            self.ui.rightExpandPb.setText('<')
+        par['right_expanded'] = not par['right_expanded']
+
+    def down_expand(self):
+        if par['down_expanded']:
+            self.mainwindow.resize(350, 250)
+            self.ui.downExpandPb.setText('V')
+        else:
+            self.mainwindow.resize(350, 500)
+            # self.mainwindow.move(10,10)
+            self.ui.downExpandPb.setText('A')
+        par['down_expanded'] = not par['down_expanded']
 
     def graph_init(self):
         self.graph_canvas = FigureCanvas(plt.Figure(figsize=(3, 2)))
@@ -276,11 +301,12 @@ class Main:
             pass
 
         if self.ui.xautorangePb.isChecked():
-            self.ui.xminDsb.setValue(max(0, max(data['time [s]']) - self.ui.xrangeDsb.value()))
-            self.ui.xmaxDsb.setValue(max(max(data['time [s]']), 1))
+            # self.ui.xminDsb.setValue(max(0, int(max(data['time [s]'])) - self.ui.xrangeDsb.value()))
+            self.ui.xmaxDsb.setValue(max(int(max(data['time [s]'])) + 1, 1))
+            self.ui.xminDsb.setValue(self.ui.xmaxDsb.value() - self.ui.xrangeDsb.value())
             self.ui.xposSld.setValue(int(self.ui.xmaxDsb.value()))
 
-            self.ui.xrangeSld.setMaximum(int(max(data['time [s]'])))
+            self.ui.xrangeSld.setMaximum(int(max(data['time [s]'])) + 1)
             self.ui.xrangeSld.setValue(int(self.ui.xrangeDsb.value()))
 
             try:

@@ -101,4 +101,6 @@ mb_reg = {
 par = {
     'set': 0,
     'read': 0,
+    'right_expanded': False,
+    'down_expanded': False,
 }
