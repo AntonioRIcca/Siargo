@@ -16,14 +16,16 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(350, 250)
         MainWindow.setStyleSheet("QProgressBar{\n"
+"    color: rgb(170, 85, 0);\n"
+"\n"
 "    border: 2px solid grey;\n"
 "    border-radius: 5px;\n"
-"    text-align: center\n"
+"    text-align: center;\n"
 "}\n"
 "\n"
-"QProgressBar::chunk {\n"
+"/**QProgressBar::chunk {\n"
 "    background-color: rgb(255, 170, 127);\n"
-"}")
+"}**/")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.regTW = QtWidgets.QTableWidget(self.centralwidget)
@@ -46,7 +48,7 @@ class Ui_MainWindow(object):
         self.setFlowDsb.setButtonSymbols(QtWidgets.QAbstractSpinBox.NoButtons)
         self.setFlowDsb.setMaximum(1000.0)
         self.setFlowDsb.setSingleStep(50.0)
-        self.setFlowDsb.setProperty("value", 1000.0)
+        self.setFlowDsb.setProperty("value", 0.0)
         self.setFlowDsb.setObjectName("setFlowDsb")
         self.setLbl = QtWidgets.QLabel(self.centralwidget)
         self.setLbl.setGeometry(QtCore.QRect(110, 90, 30, 25))
@@ -63,7 +65,7 @@ class Ui_MainWindow(object):
         self.setPercDsb.setButtonSymbols(QtWidgets.QAbstractSpinBox.NoButtons)
         self.setPercDsb.setMaximum(9999.99)
         self.setPercDsb.setSingleStep(50.0)
-        self.setPercDsb.setProperty("value", 100.0)
+        self.setPercDsb.setProperty("value", 0.0)
         self.setPercDsb.setObjectName("setPercDsb")
         self.readLbl = QtWidgets.QLabel(self.centralwidget)
         self.readLbl.setGeometry(QtCore.QRect(110, 160, 30, 25))
@@ -88,7 +90,7 @@ class Ui_MainWindow(object):
         self.fake_flowReadDsb.setProperty("value", 0.0)
         self.fake_flowReadDsb.setObjectName("fake_flowReadDsb")
         self.fakeCkb = QtWidgets.QCheckBox(self.centralwidget)
-        self.fakeCkb.setGeometry(QtCore.QRect(20, 220, 70, 17))
+        self.fakeCkb.setGeometry(QtCore.QRect(310, 210, 70, 17))
         self.fakeCkb.setObjectName("fakeCkb")
         self.xautorangePb = QtWidgets.QPushButton(self.centralwidget)
         self.xautorangePb.setGeometry(QtCore.QRect(900, 455, 70, 25))
@@ -120,7 +122,7 @@ class Ui_MainWindow(object):
         self.xposSld.setTickInterval(0)
         self.xposSld.setObjectName("xposSld")
         self.yminDsb = QtWidgets.QDoubleSpinBox(self.centralwidget)
-        self.yminDsb.setGeometry(QtCore.QRect(370, 347, 70, 25))
+        self.yminDsb.setGeometry(QtCore.QRect(370, 352, 70, 25))
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
@@ -152,7 +154,7 @@ class Ui_MainWindow(object):
         self.xrangeSld.setTickInterval(0)
         self.xrangeSld.setObjectName("xrangeSld")
         self.ymaxDsb = QtWidgets.QDoubleSpinBox(self.centralwidget)
-        self.ymaxDsb.setGeometry(QtCore.QRect(370, 40, 71, 25))
+        self.ymaxDsb.setGeometry(QtCore.QRect(370, 45, 71, 25))
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
@@ -166,14 +168,14 @@ class Ui_MainWindow(object):
         self.ymaxDsb.setSingleStep(50.0)
         self.ymaxDsb.setObjectName("ymaxDsb")
         self.graphMainWgt = QtWidgets.QWidget(self.centralwidget)
-        self.graphMainWgt.setGeometry(QtCore.QRect(370, 5, 600, 400))
+        self.graphMainWgt.setGeometry(QtCore.QRect(370, 10, 600, 400))
         self.graphMainWgt.setObjectName("graphMainWgt")
         self.graphMainHBL = QtWidgets.QHBoxLayout(self.graphMainWgt)
         self.graphMainHBL.setContentsMargins(0, 0, 0, 0)
         self.graphMainHBL.setSpacing(0)
         self.graphMainHBL.setObjectName("graphMainHBL")
         self.yautorangePb = QtWidgets.QPushButton(self.centralwidget)
-        self.yautorangePb.setGeometry(QtCore.QRect(370, 10, 70, 25))
+        self.yautorangePb.setGeometry(QtCore.QRect(370, 15, 70, 25))
         self.yautorangePb.setCheckable(True)
         self.yautorangePb.setChecked(True)
         self.yautorangePb.setObjectName("yautorangePb")
@@ -186,8 +188,11 @@ class Ui_MainWindow(object):
         self.rightExpandPb.setObjectName("rightExpandPb")
         self.setPrB = QtWidgets.QProgressBar(self.centralwidget)
         self.setPrB.setGeometry(QtCore.QRect(150, 120, 160, 15))
-        self.setPrB.setStyleSheet("")
-        self.setPrB.setProperty("value", 24)
+        self.setPrB.setStyleSheet("QProgressBar::chunk{\n"
+"    background-color: rgb(0, 170, 255);\n"
+"    margin: 1px;\n"
+"}")
+        self.setPrB.setProperty("value", 0)
         self.setPrB.setTextVisible(False)
         self.setPrB.setObjectName("setPrB")
         self.topImgLbl = QtWidgets.QLabel(self.centralwidget)
@@ -202,8 +207,11 @@ class Ui_MainWindow(object):
         self.mfcImgLbl.setObjectName("mfcImgLbl")
         self.readPrB = QtWidgets.QProgressBar(self.centralwidget)
         self.readPrB.setGeometry(QtCore.QRect(150, 140, 160, 15))
-        self.readPrB.setStyleSheet("")
-        self.readPrB.setProperty("value", 24)
+        self.readPrB.setStyleSheet("QProgressBar::chunk{\n"
+"    background-color: rgb(255, 170, 0);\n"
+"    margin: 1px;\n"
+"}")
+        self.readPrB.setProperty("value", 0)
         self.readPrB.setTextVisible(False)
         self.readPrB.setObjectName("readPrB")
         self.downExpandPb = QtWidgets.QPushButton(self.centralwidget)
@@ -221,8 +229,20 @@ class Ui_MainWindow(object):
         self.readPercDsb.setButtonSymbols(QtWidgets.QAbstractSpinBox.NoButtons)
         self.readPercDsb.setMaximum(9999.99)
         self.readPercDsb.setSingleStep(50.0)
-        self.readPercDsb.setProperty("value", 100.0)
+        self.readPercDsb.setProperty("value", 0.0)
         self.readPercDsb.setObjectName("readPercDsb")
+        self.capLbl = QtWidgets.QLabel(self.centralwidget)
+        self.capLbl.setGeometry(QtCore.QRect(10, 192, 131, 20))
+        font = QtGui.QFont()
+        font.setPointSize(7)
+        font.setBold(False)
+        font.setWeight(50)
+        self.capLbl.setFont(font)
+        self.capLbl.setStyleSheet("border: solid;\n"
+"border-width: 1px;\n"
+"border-radius: 5px;")
+        self.capLbl.setAlignment(QtCore.Qt.AlignCenter)
+        self.capLbl.setObjectName("capLbl")
         self.graphMainWgt.raise_()
         self.regTW.raise_()
         self.refreshPb.raise_()
@@ -250,6 +270,7 @@ class Ui_MainWindow(object):
         self.readPrB.raise_()
         self.downExpandPb.raise_()
         self.readPercDsb.raise_()
+        self.capLbl.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -259,7 +280,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         item = self.regTW.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "New Column"))
+        item.setText(_translate("MainWindow", "Parametro"))
         item = self.regTW.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "Registro"))
         item = self.regTW.horizontalHeaderItem(2)
@@ -272,13 +293,14 @@ class Ui_MainWindow(object):
         self.readLbl.setText(_translate("MainWindow", "Read"))
         self.readFlowDsb.setSuffix(_translate("MainWindow", " NmL/min"))
         self.fake_flowReadDsb.setSuffix(_translate("MainWindow", " NmL/min"))
-        self.fakeCkb.setText(_translate("MainWindow", "CheckBox"))
+        self.fakeCkb.setText(_translate("MainWindow", "fake"))
         self.xautorangePb.setText(_translate("MainWindow", "Auto Range"))
         self.xrangeDsb.setSuffix(_translate("MainWindow", " min"))
         self.yautorangePb.setText(_translate("MainWindow", "Auto"))
         self.rightExpandPb.setText(_translate("MainWindow", ">"))
         self.downExpandPb.setText(_translate("MainWindow", "V"))
         self.readPercDsb.setSuffix(_translate("MainWindow", "%"))
+        self.capLbl.setText(_translate("MainWindow", "Capacity: 0,00 NmL/min"))
 
 
 if __name__ == "__main__":

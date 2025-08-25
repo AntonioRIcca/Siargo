@@ -21,6 +21,7 @@ import os
 
 import serial.tools.list_ports
 
+from ui.CustomFlowRate.customFlowRate import CustomFlowRate
 from Utility.variables import instr, mb_reg, par
 
 for port in serial.tools.list_ports.comports():
@@ -62,6 +63,15 @@ class Main:
 
         self.mb_connect()
 
+        instr['flux']['def'] = self.client.read_holding_registers(address=139,
+                                                                  count=1,
+                                                                  slave=instr['conn']['slave']
+                                                                  ).registers[0]
+        if not instr['flux']['custom']:
+            instr['flux']['cap'] = instr['flux']['def']
+
+        print(instr['flux']['cap'])
+
         # -- Grafico -------------------------------------------------------------------------------------
         # a = FuncAnimation(plt.gcf(), self.animate, interval=1000)
         # plt.tight_layout()
@@ -88,6 +98,7 @@ class Main:
         self.ui.setFlowDsb.lineEdit().returnPressed.connect(self.setpoint_set)
         self.ui.rightExpandPb.clicked.connect(self.right_expand)
         self.ui.downExpandPb.clicked.connect(self.down_expand)
+        self.ui.capLbl.mouseDoubleClickEvent = self.custom_flow_rate
         # ------------------------------------------------------------------------------------------------
 
         timer = QtCore.QTimer()
@@ -154,6 +165,10 @@ class Main:
             self.ui.regTW.setItem(r, 1, QtWidgets.QTableWidgetItem(str(mb_reg[par]['reg'])))
             self.ui.regTW.setItem(r, 2, QtWidgets.QTableWidgetItem(str(mb_reg[par]['value'])))
 
+        self.ui.regTW.setColumnWidth(0, 140)
+        self.ui.regTW.setColumnWidth(1, 50)
+        self.ui.regTW.setColumnWidth(2, 65)
+        self.ui.regTW.setVisible(False)
         print(self.ui.regTW.rowCount())
 
     def tab_refresh(self):
@@ -171,6 +186,8 @@ class Main:
         if self.client.connect():  # Connessione al dispositivo
             value = self.ui.setFlowDsb.value() / 1000 * 64000
             self.client.write_register(slave=instr['conn']['slave'], address=187, value=int(value))
+            self.ui.setPercDsb.setValue(self.ui.setFlowDsb.value() / instr['flux']['cap'] * 100)
+            self.ui.setPrB.setValue(int(self.ui.setPercDsb.value()))
 
     def com_selection(self):
         self.client.close()
@@ -182,12 +199,26 @@ class Main:
 
     def refresh(self):
         if self.ui.fakeCkb.isChecked():
-            self.ui.readFlowDsb.setValue(self.ui.fake_flowReadDsb.value())
+            par['read'] = self.ui.fake_flowReadDsb.value()
             # print('Fake read', self.ui.fake_flowReadDsb.value())
         else:
-            self.ui.readFlowDsb.setValue(
-                (mb_reg['Flow rate 1']['value'] * 65536 + mb_reg['Flow rate 2']['value']) / 1000)
-            self.ui.readPercDsb.setValue((mb_reg['Flow1']['value'] * 65536 + mb_reg['Flow2']['value']) / 1000)
+            par['read'] = (mb_reg['Flow rate 1']['value'] * 65536 + mb_reg['Flow rate 2']['value']) / 1000
+            # self.ui.readPercDsb.setValue((mb_reg['Flow1']['value'] * 65536 + mb_reg['Flow2']['value']) / 1000)
+        self.ui.readFlowDsb.setValue(par['read'])
+        self.ui.readPercDsb.setValue(self.ui.readFlowDsb.value() / instr['flux']['cap'] * 100)
+        self.ui.readPrB.setValue(int(self.ui.readPercDsb.value()))
+
+        # -- Definizione del colore della barra percentuale --------
+        if abs(self.ui.readPercDsb.value() - self.ui.setPercDsb.value()) / max(0.1, self.ui.setPercDsb.value()) > 0.05:
+            col = "rgb(170, 0, 0)"
+        elif abs(self.ui.readPercDsb.value() - self.ui.setPercDsb.value()) / max(0.1, self.ui.setPercDsb.value()) > 0.02:
+            col = "rgb(255, 170, 0)"
+        else:
+            col = "rgb(0, 130, 0)"
+
+        self.ui.readPrB.setStyleSheet('QProgressBar::chunk{background-color: '+ col + ' ; margin: 1px;}')
+        # ----------------------------------------------------------
+
         self.tab_refresh()
         self.data_storage()
         self.graph_update()
@@ -199,32 +230,52 @@ class Main:
             csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
 
             line = {
-                'time [s]': (time.perf_counter() - self.start_t) / 10,
+                'time [s]': (time.perf_counter() - self.start_t) / 60,
                 'Q_set [Nml/min]': par['set'],
                 'Q_read [NmL/min]': par['read']
             }
 
             csv_writer.writerow(line)
 
+    def custom_flow_rate(self, event=None):
+        print('custom')
+        popup = CustomFlowRate()
+        popup.setFixedSize(200, 80)
+
+        if popup.exec_():
+            pass
+
     def right_expand(self):
+        if par['down_expanded']:
+            h = 490
+        else:
+            h = 250
+
         if par['right_expanded']:
-            self.mainwindow.resize(350, 250)
+            self.mainwindow.resize(350, h)
             self.ui.rightExpandPb.setText('>')
         else:
-            self.mainwindow.resize(1000, 500)
+            self.mainwindow.resize(980, 490)
             # self.mainwindow.move(10,10)
             self.ui.rightExpandPb.setText('<')
         par['right_expanded'] = not par['right_expanded']
 
     def down_expand(self):
+        l = self.mainwindow.size().width()
+        if par['right_expanded']:
+            h = 490
+        else:
+            h = 250
+
         if par['down_expanded']:
-            self.mainwindow.resize(350, 250)
+            self.mainwindow.resize(l, h)
             self.ui.downExpandPb.setText('V')
         else:
-            self.mainwindow.resize(350, 500)
+            self.mainwindow.resize(l, 490)
             # self.mainwindow.move(10,10)
             self.ui.downExpandPb.setText('A')
         par['down_expanded'] = not par['down_expanded']
+        self.ui.regTW.setVisible(par['down_expanded'])
 
     def graph_init(self):
         self.graph_canvas = FigureCanvas(plt.Figure(figsize=(3, 2)))
@@ -369,51 +420,6 @@ class Main:
 
         plt.legend(loc='upper left')
         plt.tight_layout()
-
-
-    def dopo(self):
-        if client.connect():  # Connessione al dispositivo
-            registers = 250
-            results = []
-            addr = 0
-            while addr < registers:
-                count = min(100, registers-addr)
-                results += client.read_holding_registers(address=addr, count=count, slave=1).registers
-                addr += count
-
-        else:
-            mb_conn = False
-
-        # print(mb_conn)
-        # print(results)
-        # print(len(results))
-
-        for par in mb_reg:
-            addr = mb_reg[par]['reg'] - 1
-            mb_reg[par]['value'] = results[addr]
-
-            print(par, addr, mb_reg[par]['value'])
-
-
-        if client.connect():  # Connessione al dispositivo
-            client.write_register(slave=1, address=187, value=int(0.0*64000))
-
-        if client.connect():  # Connessione al dispositivo
-            registers = 250
-            results = []
-            addr = 0
-            while addr < registers:
-                count = min(100, registers-addr)
-                results += client.read_holding_registers(address=addr, count=count, slave=1).registers
-                addr += count
-        else:
-            mb_conn = False
-
-        for par in mb_reg:
-            addr = mb_reg[par]['reg'] - 1
-            mb_reg[par]['value'] = results[addr]
-
-            print(par, addr, mb_reg[par]['value'])
 
 
 Main()

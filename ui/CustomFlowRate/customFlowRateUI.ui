@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CustDlg</class>
+ <widget class="QDialog" name="CustDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>200</width>
+    <height>80</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Fondo Scala</string>
+  </property>
+  <widget class="QDoubleSpinBox" name="custFlowDsb">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>110</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+   <property name="buttonSymbols">
+    <enum>QAbstractSpinBox::NoButtons</enum>
+   </property>
+   <property name="suffix">
+    <string> NmL/min</string>
+   </property>
+   <property name="maximum">
+    <double>999999.000000000000000</double>
+   </property>
+   <property name="singleStep">
+    <double>50.000000000000000</double>
+   </property>
+   <property name="value">
+    <double>0.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="custCkb">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>150</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Fondo Scala personalizzato</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="confirmPb">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>40</y>
+     <width>60</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OK</string>
+   </property>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>custFlowDsb</tabstop>
+  <tabstop>confirmPb</tabstop>
+  <tabstop>custCkb</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

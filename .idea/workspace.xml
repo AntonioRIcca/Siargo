@@ -4,16 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51ef3085-f6af-4886-be1f-2996a6ed4f5d" name="Changes" comment="Barra orizzontale terminata">
+    <list default="true" id="ddd04687-eb32-4bb0-80f8-f31b715f311f" name="Changes" comment="continuazione modifica grafica">
+      <change afterPath="$PROJECT_DIR$/ui/CustomFlowRate/customFlowRate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utility/variables.py" beforeDir="false" afterPath="$PROJECT_DIR$/Utility/variables.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_data/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_data/config.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_data/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/_data/data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainUi.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainUi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainUi.ui" beforeDir="false" afterPath="$PROJECT_DIR$/mainUi.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -27,25 +37,114 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/AntonioRIcca/Siargo.git&quot;,
-    &quot;accountId&quot;: &quot;b12845d9-078e-41a6-a65c-8d0a97b0646e&quot;
+    &quot;accountId&quot;: &quot;76624aa5-0bbf-43c7-8bf2-8113507b007a&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 7
+  &quot;associatedIndex&quot;: 6
 }</component>
-  <component name="ProjectId" id="31YX3Grv5OL4Dr3EtpWveiZToTq" />
+  <component name="ProjectId" id="30JLOuK1R2JHT2SIyFwVh5wYTNh" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Python.Test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_man.executor&quot;: &quot;Run&quot;,
+    &quot;Python.graph.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/anton/PycharmProjects/Siargo&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\anton\PycharmProjects\Siargo" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\anton\PycharmProjects\Siargo\ui\CustomFlowRate" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="data_man" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Siargo" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Utility" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Utility/data_man.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="graph" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Siargo" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Utility" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Utility/graph.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Siargo" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.graph" />
+        <item itemvalue="Python.data_man" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -53,14 +152,104 @@
       </set>
     </attachedChunks>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="51ef3085-f6af-4886-be1f-2996a6ed4f5d" name="Changes" comment="Barra orizzontale terminata" />
-      <created>1755701780793</created>
+      <changelist id="ddd04687-eb32-4bb0-80f8-f31b715f311f" name="Changes" comment="" />
+      <created>1753340700115</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1755701780793</updated>
+      <updated>1753340700115</updated>
     </task>
+    <task id="LOCAL-00001" summary="Start">
+      <option name="closed" value="true" />
+      <created>1753359531126</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1753359531126</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Prima interfaccia">
+      <option name="closed" value="true" />
+      <created>1753374491729</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1753374491729</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Prima prova con gas">
+      <option name="closed" value="true" />
+      <created>1753449036760</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1753449036760</updated>
+    </task>
+    <task id="LOCAL-00004" summary="base acquisizione dati e grafico">
+      <option name="closed" value="true" />
+      <created>1753888937848</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1753888937848</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Primo tentativo grafico">
+      <option name="closed" value="true" />
+      <created>1754055194494</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1754055194494</updated>
+    </task>
+    <task id="LOCAL-00006" summary="wok in progress, slide bars">
+      <option name="closed" value="true" />
+      <created>1754132773466</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1754132773466</updated>
+    </task>
+    <task id="LOCAL-00007" summary="work in progress, slide bars">
+      <option name="closed" value="true" />
+      <created>1754219775776</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1754219775776</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Regolazione verticale: work in progress">
+      <option name="closed" value="true" />
+      <created>1754243112102</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1754243112102</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Regolazione verticale: completa&#10;Manca la parzializzazione dei dati (se necessaria)">
+      <option name="closed" value="true" />
+      <created>1754251859225</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1754251859225</updated>
+    </task>
+    <task id="LOCAL-00010" summary="inizio modifica grafica">
+      <option name="closed" value="true" />
+      <created>1755541423398</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1755541423398</updated>
+    </task>
+    <task id="LOCAL-00011" summary="inizio modifica grafica">
+      <option name="closed" value="true" />
+      <created>1755541428881</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1755541428881</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -74,12 +263,26 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Start" />
+    <MESSAGE value="Prima interfaccia" />
+    <MESSAGE value="Prima prova con gas" />
+    <MESSAGE value="base acquisizione dati e grafico" />
+    <MESSAGE value="Primo tentativo grafico" />
+    <MESSAGE value="wok in progress, slide bars" />
+    <MESSAGE value="work in progress, slide bars" />
+    <MESSAGE value="Regolazione verticale: work in progress" />
+    <MESSAGE value="Regolazione verticale: completa&#10;Manca la parzializzazione dei dati (se necessaria)" />
+    <MESSAGE value="inizio modifica grafica" />
+    <option name="LAST_COMMIT_MESSAGE" value="inizio modifica grafica" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <option name="timeStamp" value="1" />
+          <line>305</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -1,0 +1,169 @@
+Index: _data/data.csv
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>time [s],Q_set [Nml/min],Q_read [NmL/min]\r\n0.003525403333333088,1000.0,0.0\r\n0.006931804999991679,1000.0,0.0\r\n0.010297676666656723,1000.0,0.0\r\n0.013688841666665515,1000.0,0.0\r\n0.017165463333321897,1000.0,0.0\r\n0.020418858333323443,1000.0,0.0\r\n0.02387567499999932,1000.0,0.0\r\n0.027247333333328547,1000.0,0.0\r\n0.0306136699999873,1000.0,0.0\r\n0.03398276999999628,1000.0,0.0\r\n0.03739313666666628,1000.0,0.0\r\n0.04074911499998658,1000.0,0.0\r\n0.04417647333333055,1000.0,0.0\r\n0.047544284999988425,1000.0,0.0\r\n0.050931761666667325,1000.0,0.0\r\n0.05450284833332262,1000.0,0.0\r\n0.05790233999999449,1000.0,0.0\r\n0.06127944499999103,1000.0,150.0\r\n0.06463438333332003,1000.0,150.0\r\n0.0680131250000007,1000.0,150.0\r\n0.07136682166666712,1000.0,150.0\r\n0.07476692499999445,1000.0,200.0\r\n0.07818472499999794,1000.0,250.0\r\n0.081558448333332,1000.0,300.0\r\n0.0848408366666566,1000.0,300.0\r\n0.0883419849999882,1000.0,300.0\r\n0.09174710499999796,1000.0,200.0\r\n0.09510174333333149,1000.0,50.0\r\n0.09845971333332576,1000.0,50.0\r\n0.10181682999999188,1000.0,50.0\r\n0.10517178499999318,1000.0,0.0\r\n0.108582943333325,1000.0,0.0\r\n0.11195931833332604,1000.0,0.0\r\n0.11521045333332343,1000.0,0.0\r\n0.11866169333332739,1000.0,0.0\r\n0.12212831166666546,1000.0,0.0\r\n0.12543680666666054,1000.0,0.0\r\n0.1288503550000011,1000.0,0.0\r\n0.13224119999999856,1000.0,0.0\r\n0.13558661999998853,1000.0,0.0\r\n0.13899066833332654,1000.0,0.0\r\n0.143729563333333,1000.0,0.0\r\n0.14574052166666054,1000.0,0.0\r\n0.1503627616666563,1000.0,0.0\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/_data/data.csv b/_data/data.csv
+--- a/_data/data.csv	(revision f09dd78b6c0d6024fb56722f615bc2ec163c7d0d)
++++ b/_data/data.csv	(date 1755787765497)
+@@ -1,45 +1,63 @@
+ time [s],Q_set [Nml/min],Q_read [NmL/min]
+-0.003525403333333088,1000.0,0.0
+-0.006931804999991679,1000.0,0.0
+-0.010297676666656723,1000.0,0.0
+-0.013688841666665515,1000.0,0.0
+-0.017165463333321897,1000.0,0.0
+-0.020418858333323443,1000.0,0.0
+-0.02387567499999932,1000.0,0.0
+-0.027247333333328547,1000.0,0.0
+-0.0306136699999873,1000.0,0.0
+-0.03398276999999628,1000.0,0.0
+-0.03739313666666628,1000.0,0.0
+-0.04074911499998658,1000.0,0.0
+-0.04417647333333055,1000.0,0.0
+-0.047544284999988425,1000.0,0.0
+-0.050931761666667325,1000.0,0.0
+-0.05450284833332262,1000.0,0.0
+-0.05790233999999449,1000.0,0.0
+-0.06127944499999103,1000.0,150.0
+-0.06463438333332003,1000.0,150.0
+-0.0680131250000007,1000.0,150.0
+-0.07136682166666712,1000.0,150.0
+-0.07476692499999445,1000.0,200.0
+-0.07818472499999794,1000.0,250.0
+-0.081558448333332,1000.0,300.0
+-0.0848408366666566,1000.0,300.0
+-0.0883419849999882,1000.0,300.0
+-0.09174710499999796,1000.0,200.0
+-0.09510174333333149,1000.0,50.0
+-0.09845971333332576,1000.0,50.0
+-0.10181682999999188,1000.0,50.0
+-0.10517178499999318,1000.0,0.0
+-0.108582943333325,1000.0,0.0
+-0.11195931833332604,1000.0,0.0
+-0.11521045333332343,1000.0,0.0
+-0.11866169333332739,1000.0,0.0
+-0.12212831166666546,1000.0,0.0
+-0.12543680666666054,1000.0,0.0
+-0.1288503550000011,1000.0,0.0
+-0.13224119999999856,1000.0,0.0
+-0.13558661999998853,1000.0,0.0
+-0.13899066833332654,1000.0,0.0
+-0.143729563333333,1000.0,0.0
+-0.14574052166666054,1000.0,0.0
+-0.1503627616666563,1000.0,0.0
++0.003879081666666669,1000.0,0.0
++0.007290365000000065,1000.0,0.0
++0.010651508333333481,1000.0,0.0
++0.013983386666667267,1000.0,0.0
++0.017646696666667103,1000.0,0.0
++0.02103654833333337,1000.0,0.0
++0.024373473333333586,1000.0,0.0
++0.027711065000000683,1000.0,0.0
++0.03107053333333359,1000.0,0.0
++0.03442661500000004,1000.0,0.0
++0.0377568016666667,1000.0,0.0
++0.04116064166666718,1000.0,0.0
++0.04456824666666724,1000.0,0.0
++0.04797751500000042,1000.0,0.0
++0.05134010833333396,1000.0,0.0
++0.05468574500000045,1000.0,0.0
++0.05805374166666676,1000.0,0.0
++0.06142407500000028,1000.0,0.0
++0.06479186666666692,1000.0,0.0
++0.06817993666666666,1000.0,0.0
++0.07154321999999998,1000.0,0.0
++0.07517363500000064,1000.0,0.0
++0.078558213333334,1000.0,0.0
++0.08194216666666705,1000.0,0.0
++0.08521312833333354,1000.0,0.0
++0.08851039833333327,1000.0,0.0
++0.0918913416666669,1000.0,0.0
++0.09525284999999997,1000.0,0.0
++0.0986256316666669,1000.0,0.0
++0.10202748500000022,1000.0,0.0
++0.1056261383333331,1000.0,0.0
++0.10903428500000037,1000.0,0.0
++0.11219323499999992,1000.0,0.0
++0.11555695166666642,1000.0,0.0
++0.11901370333333337,1000.0,0.0
++0.12241559166666699,1000.0,0.0
++0.1257870416666672,1000.0,0.0
++0.12914446333333368,1000.0,0.0
++0.13252718499999977,1000.0,0.0
++0.13589619000000067,1000.0,0.0
++0.1393311616666665,1000.0,0.0
++0.14274979333333324,1000.0,0.0
++0.14603185666666718,1000.0,0.0
++0.14948127333333333,1000.0,0.0
++0.1528239450000001,1000.0,0.0
++0.15630306500000019,1000.0,0.0
++0.15969812000000067,1000.0,0.0
++0.16303300999999995,1000.0,0.0
++0.16641977333333385,1000.0,0.0
++0.1698036966666668,1000.0,0.0
++0.17315543166666694,1000.0,0.0
++0.17656002666666665,1000.0,0.0
++0.17988576666666725,1000.0,0.0
++0.18334016166666725,1000.0,0.0
++0.18668786333333381,1000.0,0.0
++0.19004673500000044,1000.0,0.0
++0.1935217099999998,1000.0,0.0
++0.19693790500000052,1000.0,0.0
++0.20030462,1000.0,0.0
++0.20364379833333335,1000.0,0.0
++0.20709513666666718,1000.0,0.0
++0.2105027250000006,1000.0,0.0
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"ddd04687-eb32-4bb0-80f8-f31b715f311f\" name=\"Changes\" comment=\"inizio modifica grafica\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/main.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/main.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/mainUi.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/mainUi.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/mainUi.ui\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/mainUi.ui\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;AntonioRIcca&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/AntonioRIcca/Siargo.git&quot;,\r\n    &quot;accountId&quot;: &quot;76624aa5-0bbf-43c7-8bf2-8113507b007a&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 6\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"30JLOuK1R2JHT2SIyFwVh5wYTNh\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Python.Test.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.data_man.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.graph.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.main.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.test.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/anton/PycharmProjects/Siargo&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\anton\\PycharmProjects\\Siargo\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Python.main\">\r\n    <configuration name=\"data_man\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Siargo\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/Utility\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/Utility/data_man.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"graph\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Siargo\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/Utility\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/Utility/graph.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"main\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Siargo\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/main.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Python.main\" />\r\n        <item itemvalue=\"Python.graph\" />\r\n        <item itemvalue=\"Python.data_man\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-python-sdk-d9fa9deec7cb-d902c0275401-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-252.23892.515\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"ddd04687-eb32-4bb0-80f8-f31b715f311f\" name=\"Changes\" comment=\"\" />\r\n      <created>1753340700115</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1753340700115</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Start\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1753359531126</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1753359531126</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Prima interfaccia\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1753374491729</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1753374491729</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Prima prova con gas\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1753449036760</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1753449036760</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"base acquisizione dati e grafico\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1753888937848</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1753888937848</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Primo tentativo grafico\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1754055194494</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1754055194494</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"wok in progress, slide bars\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1754132773466</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1754132773466</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"work in progress, slide bars\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1754219775776</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1754219775776</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"Regolazione verticale: work in progress\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1754243112102</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1754243112102</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"Regolazione verticale: completa&#10;Manca la parzializzazione dei dati (se necessaria)\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1754251859225</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1754251859225</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"inizio modifica grafica\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1755541423398</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1755541423398</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"inizio modifica grafica\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1755541428881</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1755541428881</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"12\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Start\" />\r\n    <MESSAGE value=\"Prima interfaccia\" />\r\n    <MESSAGE value=\"Prima prova con gas\" />\r\n    <MESSAGE value=\"base acquisizione dati e grafico\" />\r\n    <MESSAGE value=\"Primo tentativo grafico\" />\r\n    <MESSAGE value=\"wok in progress, slide bars\" />\r\n    <MESSAGE value=\"work in progress, slide bars\" />\r\n    <MESSAGE value=\"Regolazione verticale: work in progress\" />\r\n    <MESSAGE value=\"Regolazione verticale: completa&#10;Manca la parzializzazione dei dati (se necessaria)\" />\r\n    <MESSAGE value=\"inizio modifica grafica\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"inizio modifica grafica\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" suspend=\"THREAD\" type=\"python-line\">\r\n          <url>file://$PROJECT_DIR$/main.py</url>\r\n          <line>229</line>\r\n          <option name=\"timeStamp\" value=\"6\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision f09dd78b6c0d6024fb56722f615bc2ec163c7d0d)
++++ b/.idea/workspace.xml	(date 1755787667925)
+@@ -4,12 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="ddd04687-eb32-4bb0-80f8-f31b715f311f" name="Changes" comment="inizio modifica grafica">
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/mainUi.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainUi.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/mainUi.ui" beforeDir="false" afterPath="$PROJECT_DIR$/mainUi.ui" afterDir="false" />
+-    </list>
++    <list default="true" id="ddd04687-eb32-4bb0-80f8-f31b715f311f" name="Changes" comment="continuazione modifica grafica" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -243,7 +238,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1755541428881</updated>
+     </task>
+-    <option name="localTasksCounter" value="12" />
++    <task id="LOCAL-00012" summary="continuazione modifica grafica">
++      <option name="closed" value="true" />
++      <created>1755689027149</created>
++      <option name="number" value="00012" />
++      <option name="presentableId" value="LOCAL-00012" />
++      <option name="project" value="LOCAL" />
++      <updated>1755689027149</updated>
++    </task>
++    <option name="localTasksCounter" value="13" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -268,7 +271,8 @@
+     <MESSAGE value="Regolazione verticale: work in progress" />
+     <MESSAGE value="Regolazione verticale: completa&#10;Manca la parzializzazione dei dati (se necessaria)" />
+     <MESSAGE value="inizio modifica grafica" />
+-    <option name="LAST_COMMIT_MESSAGE" value="inizio modifica grafica" />
++    <MESSAGE value="continuazione modifica grafica" />
++    <option name="LAST_COMMIT_MESSAGE" value="continuazione modifica grafica" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>
