@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddd04687-eb32-4bb0-80f8-f31b715f311f" name="Changes" comment="continuazione modifica grafica">
-      <change afterPath="$PROJECT_DIR$/ui/CustomFlowRate/customFlowRate.py" afterDir="false" />
+    <list default="true" id="ddd04687-eb32-4bb0-80f8-f31b715f311f" name="Changes" comment="In corso definizione salvataggioo fondo scala">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_data/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_data/config.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_data/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/_data/data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainUi.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainUi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainUi.ui" beforeDir="false" afterPath="$PROJECT_DIR$/mainUi.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -249,7 +246,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755541428881</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="In corso definizione salvataggioo fondo scala">
+      <option name="closed" value="true" />
+      <created>1756143110526</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1756143110526</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -274,14 +279,15 @@
     <MESSAGE value="Regolazione verticale: work in progress" />
     <MESSAGE value="Regolazione verticale: completa&#10;Manca la parzializzazione dei dati (se necessaria)" />
     <MESSAGE value="inizio modifica grafica" />
-    <option name="LAST_COMMIT_MESSAGE" value="inizio modifica grafica" />
+    <MESSAGE value="In corso definizione salvataggioo fondo scala" />
+    <option name="LAST_COMMIT_MESSAGE" value="In corso definizione salvataggioo fondo scala" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>305</line>
+          <line>312</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>

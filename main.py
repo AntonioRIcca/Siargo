@@ -58,55 +58,61 @@ class Main:
 
         self.tab_create()
 
-        if not self.mb_check():
-            self.com_selection()
+        connected = self.mb_check()
+        if not connected:
+            connected = self.com_selection()
 
-        self.mb_connect()
+        if connected:
+            self.mb_connect()
 
-        instr['flux']['def'] = self.client.read_holding_registers(address=139,
-                                                                  count=1,
-                                                                  slave=instr['conn']['slave']
-                                                                  ).registers[0]
-        if not instr['flux']['custom']:
-            instr['flux']['cap'] = instr['flux']['def']
+            try:
+                instr['flux']['def'] = self.client.read_holding_registers(address=139,
+                                                                      count=1,
+                                                                      slave=instr['conn']['slave']
+                                                                      ).registers[0]
+            except:
+                pass
 
-        print(instr['flux']['cap'])
+            if not instr['flux']['custom']:
+                instr['flux']['cap'] = instr['flux']['def']
 
-        # -- Grafico -------------------------------------------------------------------------------------
-        # a = FuncAnimation(plt.gcf(), self.animate, interval=1000)
-        # plt.tight_layout()
-        # plt.show()
+            print(instr['flux']['cap'])
 
-        self.start_t = time.perf_counter()
+            # -- Grafico -------------------------------------------------------------------------------------
+            # a = FuncAnimation(plt.gcf(), self.animate, interval=1000)
+            # plt.tight_layout()
+            # plt.show()
 
-        fieldnames = ['time [s]', 'Q_set [Nml/min]', 'Q_read [NmL/min]']
-        # fieldnames = ['time [s]']
-        with open('_data/data.csv', 'w',  newline='') as csv_file:
-            csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-            csv_writer.writeheader()
-            #
-            # line = {'time [s]': 0}
-            #
-            # csv_writer.writerow(line)
+            self.start_t = time.perf_counter()
 
-        self.graph_init()
-        # ------------------------------------------------------------------------------------------------
+            fieldnames = ['time [s]', 'Q_set [Nml/min]', 'Q_read [NmL/min]']
+            # fieldnames = ['time [s]']
+            with open('_data/data.csv', 'w',  newline='') as csv_file:
+                csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+                csv_writer.writeheader()
+                #
+                # line = {'time [s]': 0}
+                #
+                # csv_writer.writerow(line)
 
-        # -- Definizione delle azioni --------------------------------------------------------------------
-        self.ui.refreshPb.clicked.connect(self.tab_refresh)
-        self.ui.sendPb.clicked.connect(self.setpoint_set)
-        self.ui.setFlowDsb.lineEdit().returnPressed.connect(self.setpoint_set)
-        self.ui.rightExpandPb.clicked.connect(self.right_expand)
-        self.ui.downExpandPb.clicked.connect(self.down_expand)
-        self.ui.capLbl.mouseDoubleClickEvent = self.custom_flow_rate
-        # ------------------------------------------------------------------------------------------------
+            self.graph_init()
+            # ------------------------------------------------------------------------------------------------
 
-        timer = QtCore.QTimer()
-        timer.timeout.connect(self.refresh)
-        timer.start(200)
+            # -- Definizione delle azioni --------------------------------------------------------------------
+            self.ui.refreshPb.clicked.connect(self.tab_refresh)
+            self.ui.sendPb.clicked.connect(self.setpoint_set)
+            self.ui.setFlowDsb.lineEdit().returnPressed.connect(self.setpoint_set)
+            self.ui.rightExpandPb.clicked.connect(self.right_expand)
+            self.ui.downExpandPb.clicked.connect(self.down_expand)
+            self.ui.capLbl.mouseDoubleClickEvent = self.custom_flow_rate
+            # ------------------------------------------------------------------------------------------------
 
-        self.mainwindow.show()
-        self.app.exec()
+            timer = QtCore.QTimer()
+            timer.timeout.connect(self.refresh)
+            timer.start(200)
+
+            self.mainwindow.show()
+            self.app.exec()
 
     def mb_connect(self):
         self.client = ModbusSerialClient(
@@ -196,6 +202,7 @@ class Main:
         self.comsel = Com()
         self.comsel.show()
         self.comsel.exec_()
+        return self.comsel.ui.logLe.text() == 'Connessione OK'
 
     def refresh(self):
         if self.ui.fakeCkb.isChecked():

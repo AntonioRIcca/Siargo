@@ -3,5 +3,5 @@ conn:
   slave: 1
 flux:
   cap: 5000
-  custom: False
+  custom: false
   def: 989
