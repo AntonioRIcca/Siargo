@@ -4,11 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddd04687-eb32-4bb0-80f8-f31b715f311f" name="Changes" comment="In corso definizione salvataggioo fondo scala">
+    <list default="true" id="ddd04687-eb32-4bb0-80f8-f31b715f311f" name="Changes" comment="fix rescaling">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_08_2025_16_47_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_08_2025_16_47__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_08_2025_16_49_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_08_2025_16_49__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_data/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_data/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_data/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/_data/data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utility/COM/com.py" beforeDir="false" afterPath="$PROJECT_DIR$/Utility/COM/com.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utility/data.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utility/variables.py" beforeDir="false" afterPath="$PROJECT_DIR$/Utility/variables.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_data.data.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_data/config.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_data/data.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Utility/exe_code" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainUi.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/mainUi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainUi.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/mainUi.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/CustomFlowRate/customFlowRate.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/CustomFlowRate/customFlowRate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_mainUi.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/ui_mainUi.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,22 +38,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;AntonioRIcca&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/AntonioRIcca/Siargo.git&quot;,
-    &quot;accountId&quot;: &quot;76624aa5-0bbf-43c7-8bf2-8113507b007a&quot;
-  }
-}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="30JLOuK1R2JHT2SIyFwVh5wYTNh" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -48,15 +50,12 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Python.Test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.data_man.executor&quot;: &quot;Run&quot;,
-    &quot;Python.graph.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;Python.test.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/anton/PycharmProjects/Siargo&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -64,54 +63,11 @@
       <recent name="C:\Users\anton\PycharmProjects\Siargo" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\anton\PycharmProjects\Siargo\ui\CustomFlowRate" />
+      <recent name="C:\Users\anton\PycharmProjects\Siargo\ui" />
+      <recent name="C:\Users\anton\PycharmProjects\Siargo\_data" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
-    <configuration name="data_man" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Siargo" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Utility" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Utility/data_man.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="graph" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Siargo" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Utility" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Utility/graph.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Siargo" />
       <option name="ENV_FILES" value="" />
@@ -137,15 +93,13 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.graph" />
-        <item itemvalue="Python.data_man" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-d9fa9deec7cb-d902c0275401-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-252.23892.515" />
+        <option value="bundled-python-sdk-0509580d9d50-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.14494.241" />
       </set>
     </attachedChunks>
   </component>
@@ -182,113 +136,22 @@
       <option name="project" value="LOCAL" />
       <updated>1753449036760</updated>
     </task>
-    <task id="LOCAL-00004" summary="base acquisizione dati e grafico">
-      <option name="closed" value="true" />
-      <created>1753888937848</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1753888937848</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Primo tentativo grafico">
-      <option name="closed" value="true" />
-      <created>1754055194494</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1754055194494</updated>
-    </task>
-    <task id="LOCAL-00006" summary="wok in progress, slide bars">
-      <option name="closed" value="true" />
-      <created>1754132773466</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1754132773466</updated>
-    </task>
-    <task id="LOCAL-00007" summary="work in progress, slide bars">
-      <option name="closed" value="true" />
-      <created>1754219775776</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1754219775776</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Regolazione verticale: work in progress">
-      <option name="closed" value="true" />
-      <created>1754243112102</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1754243112102</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Regolazione verticale: completa&#10;Manca la parzializzazione dei dati (se necessaria)">
-      <option name="closed" value="true" />
-      <created>1754251859225</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1754251859225</updated>
-    </task>
-    <task id="LOCAL-00010" summary="inizio modifica grafica">
-      <option name="closed" value="true" />
-      <created>1755541423398</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1755541423398</updated>
-    </task>
-    <task id="LOCAL-00011" summary="inizio modifica grafica">
-      <option name="closed" value="true" />
-      <created>1755541428881</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1755541428881</updated>
-    </task>
-    <task id="LOCAL-00012" summary="In corso definizione salvataggioo fondo scala">
-      <option name="closed" value="true" />
-      <created>1756143110526</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1756143110526</updated>
-    </task>
-    <option name="localTasksCounter" value="13" />
+    <option name="localTasksCounter" value="4" />
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Start" />
     <MESSAGE value="Prima interfaccia" />
     <MESSAGE value="Prima prova con gas" />
-    <MESSAGE value="base acquisizione dati e grafico" />
-    <MESSAGE value="Primo tentativo grafico" />
-    <MESSAGE value="wok in progress, slide bars" />
-    <MESSAGE value="work in progress, slide bars" />
-    <MESSAGE value="Regolazione verticale: work in progress" />
-    <MESSAGE value="Regolazione verticale: completa&#10;Manca la parzializzazione dei dati (se necessaria)" />
-    <MESSAGE value="inizio modifica grafica" />
-    <MESSAGE value="In corso definizione salvataggioo fondo scala" />
-    <option name="LAST_COMMIT_MESSAGE" value="In corso definizione salvataggioo fondo scala" />
+    <option name="LAST_COMMIT_MESSAGE" value="Prima prova con gas" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>312</line>
-          <option name="timeStamp" value="6" />
+          <line>213</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

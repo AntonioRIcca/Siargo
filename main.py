@@ -2,14 +2,13 @@ import copy
 
 import yaml
 from pymodbus.client import ModbusSerialClient  # per pymodbus 3.3.x e Python 3.11
-from mainUi import Ui_MainWindow
+from ui.mainUi import Ui_MainWindow
 from PyQt5 import QtWidgets, QtCore, QtGui
 
 import csv
 
 import pandas as pd
 import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 import time
@@ -18,15 +17,15 @@ from threading import Thread
 
 import sys
 import os
+from datetime import datetime as dt
 
 import serial.tools.list_ports
 
 from ui.CustomFlowRate.customFlowRate import CustomFlowRate
-from Utility.variables import instr, mb_reg, par
-
-for port in serial.tools.list_ports.comports():
-    print(f'Current port: {port.name}')
-# print(list(serial.tools.list_ports.comports()))
+from Utility.variables import instr, mb_reg, par, folders
+#
+# for port in serial.tools.list_ports.comports():
+#     print(f'Current port: {port.name}')
 
 mb_conn = True
 
@@ -42,79 +41,89 @@ class Main:
         self.mainwindow = QtWidgets.QMainWindow()
         # ---------------------------------------------
 
-        self.mb_conn_par()
+        self.folders_manager()  # Definizione delle cartelle di salvataggio
 
-        # self.interface_open()
+        self.mb_conn_par()      # Lettura dei parametri di connessione e di flusso
+
+        # -- Avvio interfaccia principale -------------------------------------------
         f0 = Thread(target=self.interface_open())
         f0.start()
-        self.tab_create()
+        # ---------------------------------------------------------------------------
 
-        pass
-
-    def interface_open(self):   # Impostazione e apertuda dell'interfaccia
+    def interface_open(self):   # Impostazione e apertura dell'interfaccia
         self.main = Ui_MainWindow()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.mainwindow)
 
-        self.tab_create()
+        fake = False
+        self.ui.fakeCkb.setVisible(fake)
+        self.ui.fake_flowReadDsb.setVisible(fake)
 
+        self.tab_create()       # Inizializzazione tabella parametri MFC
+        self.mb_connect()       # Inizializzazione della connessione al MFC
+
+        # -- Verifica della connessione ---------------------------------------------
         connected = self.mb_check()
         if not connected:
             connected = self.com_selection()
+        # ---------------------------------------------------------------------------
 
         if connected:
-            self.mb_connect()
+            # Inserimento immagini nell'interfaccia
+            self.ui.topImgLbl.setPixmap(QtGui.QPixmap('img/top_banner_300x50.png'))
+            self.ui.mfcImgLbl.setPixmap(QtGui.QPixmap('img/mfc_100x100.png'))
 
+            self.mb_connect()   # Inizializzazione della connessione con il dispositivo
+
+            # -- Lettura del fondoscala del MFC impostato dalla fabbrica ----------------
             try:
                 instr['flux']['def'] = self.client.read_holding_registers(address=139,
-                                                                      count=1,
-                                                                      slave=instr['conn']['slave']
-                                                                      ).registers[0]
+                                                                          count=1,
+                                                                          slave=instr['conn']['slave']
+                                                                          ).registers[0]
             except:
                 pass
+            # ---------------------------------------------------------------------------
 
+            # -- Definizione della capacità dello strumento -----------------------------
             if not instr['flux']['custom']:
                 instr['flux']['cap'] = instr['flux']['def']
 
-            print(instr['flux']['cap'])
+            self.ui.capLbl.setText('Capacity: %.2f NmL/min' % instr['flux']['cap'])
+            self.ui.setFlowDsb.setMaximum(instr['flux']['cap'])
+            # ---------------------------------------------------------------------------
 
-            # -- Grafico -------------------------------------------------------------------------------------
-            # a = FuncAnimation(plt.gcf(), self.animate, interval=1000)
-            # plt.tight_layout()
-            # plt.show()
+            self.start_t = time.perf_counter()      # definizione del tempo 0
 
-            self.start_t = time.perf_counter()
-
+            # -- Inizializzazione della tabella di salvataggio dati ---------------------
             fieldnames = ['time [s]', 'Q_set [Nml/min]', 'Q_read [NmL/min]']
-            # fieldnames = ['time [s]']
-            with open('_data/data.csv', 'w',  newline='') as csv_file:
+            folders['datapath'] = folders['data'] + '/' + dt.now().strftime('%Y%m%d_%H%M%S') + '.csv'
+            with open(folders['datapath'], 'a', newline='') as csv_file:
                 csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
                 csv_writer.writeheader()
-                #
-                # line = {'time [s]': 0}
-                #
-                # csv_writer.writerow(line)
+            # ---------------------------------------------------------------------------
 
-            self.graph_init()
-            # ------------------------------------------------------------------------------------------------
+            self.graph_init()       # Inizializzazione del grafico
 
-            # -- Definizione delle azioni --------------------------------------------------------------------
-            self.ui.refreshPb.clicked.connect(self.tab_refresh)
-            self.ui.sendPb.clicked.connect(self.setpoint_set)
+            # -- Definizione delle azioni -----------------------------------------------
             self.ui.setFlowDsb.lineEdit().returnPressed.connect(self.setpoint_set)
             self.ui.rightExpandPb.clicked.connect(self.right_expand)
             self.ui.downExpandPb.clicked.connect(self.down_expand)
             self.ui.capLbl.mouseDoubleClickEvent = self.custom_flow_rate
-            # ------------------------------------------------------------------------------------------------
+            self.mainwindow.closeEvent = self.close
+            # ---------------------------------------------------------------------------
 
+            # -- Impostazione del ciclo delle azioni ------------------------------------
             timer = QtCore.QTimer()
             timer.timeout.connect(self.refresh)
             timer.start(200)
+            # ---------------------------------------------------------------------------
 
+            # Avvio dell'interfaccia
             self.mainwindow.show()
             self.app.exec()
 
-    def mb_connect(self):
+    def mb_connect(self):   # Inizializzazione della connessione al MFC
         self.client = ModbusSerialClient(
             port=instr['conn']['com'],
             startbit=1,
@@ -128,8 +137,8 @@ class Main:
             # unit=31
         )
 
-    def mb_check(self):
-        self.mb_connect()
+    def mb_check(self):     # Verifica della connessione
+        # Prova di lettira del Serial Number del MFC
         try:
             test = self.client.read_holding_registers(address=48, count=1, slave=instr['conn']['slave']).registers[0]
         except:
@@ -137,15 +146,17 @@ class Main:
         self.client.close()
         return test > 0
 
-    def mb_conn_par(self):
-        with open('_data/config.yml') as f:
+    def mb_conn_par(self):      # Lettura dei parametri di connessione e di flusso
+        with open(folders['cfg'] + '/config.yml') as f:
             cfg = yaml.safe_load(f)
         for p in cfg:
             instr[p] = copy.deepcopy(cfg[p])
 
-    def mb_reg_read_all(self, lenght=200):
-        results = []
+    def mb_reg_read_all(self, lenght=200):      # Lettura dei registri del MFC
+        results = []    # Registro provvisorio dei valodi di registro
+
         if self.client.connect():  # Connessione al dispositivo
+            # lettura dei primi 250 registri del MFC
             registers = 250
             addr = 0
             while addr < registers:
@@ -155,15 +166,12 @@ class Main:
                                                               slave=instr['conn']['slave']).registers
                 addr += count
 
+            # poppolamento del dizionario "mb_par"
             for par in mb_reg:
                 addr = mb_reg[par]['reg'] - 1
                 mb_reg[par]['value'] = results[addr]
 
-                # print(par, addr, mb_reg[par]['value'])
-        else:
-            mb_conn = False
-
-    def tab_create(self):
+    def tab_create(self):   # Inizializzazione tabella parametri MFC
         for par in mb_reg:
             r = self.ui.regTW.rowCount()
             self.ui.regTW.insertRow(r)
@@ -174,28 +182,29 @@ class Main:
         self.ui.regTW.setColumnWidth(0, 140)
         self.ui.regTW.setColumnWidth(1, 50)
         self.ui.regTW.setColumnWidth(2, 65)
-        self.ui.regTW.setVisible(False)
-        print(self.ui.regTW.rowCount())
+        self.ui.regTW.setVisible(False)     # La tabella di default è nascosta
 
-    def tab_refresh(self):
-        # print('refresh')
-        self.mb_reg_read_all()
-        # print(self.ui.regTW.item(2, 2).text())
+    def tab_refresh(self):  # Popolamento della tabella dei parametri del MFC
+        self.mb_reg_read_all()  # lettura del registro del MFC
+
+        # Scrittura della tabella dei parametri
         for i in range(len(list(mb_reg.keys()))):
             par = self.ui.regTW.item(i, 0).text()
-            # print(i, par, mb_reg[par]['value'])
             self.ui.regTW.item(i, 2).setText(str(mb_reg[par]['value']))
 
-    def setpoint_set(self):
+    def setpoint_set(self):     # Invio del setpoint
         par['set'] = self.ui.setFlowDsb.value()
-        print('par_set:', par['set'])
         if self.client.connect():  # Connessione al dispositivo
-            value = self.ui.setFlowDsb.value() / 1000 * 64000
+            value = self.ui.setFlowDsb.value() / instr['flux']['cap'] * 64000   # valore in P.U. del setpoint
+
+            # Invio al MFC del SetPoint Percentuale
             self.client.write_register(slave=instr['conn']['slave'], address=187, value=int(value))
+
+            # Aggiornamento dell'interfaccia grafica
             self.ui.setPercDsb.setValue(self.ui.setFlowDsb.value() / instr['flux']['cap'] * 100)
             self.ui.setPrB.setValue(int(self.ui.setPercDsb.value()))
 
-    def com_selection(self):
+    def com_selection(self):    # Selezione della porte COM
         self.client.close()
 
         from Utility.COM.com import Com
@@ -204,36 +213,40 @@ class Main:
         self.comsel.exec_()
         return self.comsel.ui.logLe.text() == 'Connessione OK'
 
-    def refresh(self):
-        if self.ui.fakeCkb.isChecked():
-            par['read'] = self.ui.fake_flowReadDsb.value()
-            # print('Fake read', self.ui.fake_flowReadDsb.value())
-        else:
-            par['read'] = (mb_reg['Flow rate 1']['value'] * 65536 + mb_reg['Flow rate 2']['value']) / 1000
-            # self.ui.readPercDsb.setValue((mb_reg['Flow1']['value'] * 65536 + mb_reg['Flow2']['value']) / 1000)
+    def refresh(self):          # Azioni cicliche
+        # -- Lettura del valore del flusso ------------------------------------------
+        if self.ui.fakeCkb.isChecked():     # Nel caso di Fake Flow
+            par['read'] = self.ui.fake_flowReadDsb.value() / 100 * instr['flux']['cap']
+        else:                               # Nel caso reale
+            par['read'] = ((mb_reg['Flow rate 1']['value'] * 65536 + mb_reg['Flow rate 2']['value'])
+                           / 1e6 * instr['flux']['cap'])
+        # ---------------------------------------------------------------------------
+
+        # -- Aggiornamento dell'interfaccia grafica ---------------------------------
         self.ui.readFlowDsb.setValue(par['read'])
         self.ui.readPercDsb.setValue(self.ui.readFlowDsb.value() / instr['flux']['cap'] * 100)
         self.ui.readPrB.setValue(int(self.ui.readPercDsb.value()))
+        # ---------------------------------------------------------------------------
 
-        # -- Definizione del colore della barra percentuale --------
+        # -- Definizione del colore della barra percentuale -------------------------
         if abs(self.ui.readPercDsb.value() - self.ui.setPercDsb.value()) / max(0.1, self.ui.setPercDsb.value()) > 0.05:
             col = "rgb(170, 0, 0)"
         elif abs(self.ui.readPercDsb.value() - self.ui.setPercDsb.value()) / max(0.1, self.ui.setPercDsb.value()) > 0.02:
             col = "rgb(255, 170, 0)"
         else:
             col = "rgb(0, 130, 0)"
-
         self.ui.readPrB.setStyleSheet('QProgressBar::chunk{background-color: '+ col + ' ; margin: 1px;}')
-        # ----------------------------------------------------------
+        # ---------------------------------------------------------------------------
 
-        self.tab_refresh()
-        self.data_storage()
-        self.graph_update()
+        self.tab_refresh()      # Aggironamento della tabella
+        self.data_storage()     # Salvataggio dati
+        self.graph_update()     # Aggiornamento del grafico
 
-    def data_storage(self):
+    def data_storage(self):     # Salvataggio dati
         fieldnames = ['time [s]', 'Q_set [Nml/min]', 'Q_read [NmL/min]']
 
-        with open('_data/data.csv', 'a', newline='') as csv_file:
+        # Scrittura della linea dei dati
+        with open(folders['datapath'], 'a', newline='') as csv_file:
             csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
 
             line = {
@@ -244,15 +257,17 @@ class Main:
 
             csv_writer.writerow(line)
 
-    def custom_flow_rate(self, event=None):
-        print('custom')
+    def custom_flow_rate(self, event=None):     # Modifica del fondo-scala
         popup = CustomFlowRate()
         popup.setFixedSize(200, 80)
 
         if popup.exec_():
             pass
+        self.ui.capLbl.setText('Capacity: %.2f NmL/min' % instr['flux']['cap'])
+        self.ui.setFlowDsb.setMaximum(instr['flux']['cap'])
+        self.setpoint_set()     # Aggiornamento del setpoint sulla base del nuovo fondoscala
 
-    def right_expand(self):
+    def right_expand(self):     # Visualizzazione/nascondimento del grafico
         if par['down_expanded']:
             h = 490
         else:
@@ -263,11 +278,11 @@ class Main:
             self.ui.rightExpandPb.setText('>')
         else:
             self.mainwindow.resize(980, 490)
-            # self.mainwindow.move(10,10)
             self.ui.rightExpandPb.setText('<')
         par['right_expanded'] = not par['right_expanded']
 
-    def down_expand(self):
+    def down_expand(self):      # Visualizzazione/nascondimento della tabella
+        # definizione delle dimensioni prima dell'azione
         l = self.mainwindow.size().width()
         if par['right_expanded']:
             h = 490
@@ -284,7 +299,7 @@ class Main:
         par['down_expanded'] = not par['down_expanded']
         self.ui.regTW.setVisible(par['down_expanded'])
 
-    def graph_init(self):
+    def graph_init(self):       # inizializzazione del grafico
         self.graph_canvas = FigureCanvas(plt.Figure(figsize=(3, 2)))
         self.ax_Q = self.graph_canvas.figure.subplots()
         self.ui.graphMainHBL.addWidget(self.graph_canvas)
@@ -298,49 +313,22 @@ class Main:
         self.labels_Q = self.ax_Q.get_legend_handles_labels()[1]
         self.ax_Q.legend(self.handles_Q, self.labels_Q)
 
-    def graph_update(self):
-        data = pd.read_csv('_data/data.csv')
-
-        # print(list(data['Q_set [Nml/min]']))
-
-        # length = len(data['time [s]'])
-        #
-        # i_start, i_end = 0, length
-        # for i in range(0, length):
-        #     if list(data['time [s]'])[i] >= self.ui.xminDsb.value():
-        #         i_start = i
-        #         break
-        # for i in range (i_start, length):
-        #     if list(data['time [s]'])[i] >= self.ui.xmaxDsb.value():
-        #         i_end = i
-        #         break
-        #
-        # data_red = {
-        #     'time [s]': list(data['time [s]'])[i_start:i_end],
-        #     'Q_set [Nml/min]': list(data['Q_set [Nml/min]'])[i_start:i_end],
-        #     'Q_read [NmL/min]': list(data['Q_read [NmL/min]'])[i_start:i_end],
-        # }
-        #
-        # print('length:', length,'start:', i_start, 'end:', i_end)
-        # # print('l1:', len(data), 'l2', len(data_red))
-
-
+    def graph_update(self):     # Aggiornamento del grafico
+        data = pd.read_csv(folders['datapath'])     # lettura dei dati da file
 
         self.line_Qset.set_xdata(data['time [s]'])
         self.line_Qread.set_xdata(data['time [s]'])
         self.line_Qset.set_ydata(data['Q_set [Nml/min]'])
         self.line_Qread.set_ydata(data['Q_read [NmL/min]'])
 
-        # xlim = max(max(data['time [s]']), 1)
-
-        self.x_axis_manager(data)
-        self.y_axis_manager(data)
+        self.x_axis_manager(data)   # aggiornamento dell'asse x
+        self.y_axis_manager(data)   # aggiornamento dell'asse y
 
         self.graph_canvas.draw()
         self.graph_canvas.flush_events()
         pass
 
-    def x_axis_manager(self, data):
+    def x_axis_manager(self, data):     # Aggiornamento dell'asse x
         self.ui.xminDsb.setEnabled(not self.ui.xautorangePb.isChecked())
         self.ui.xmaxDsb.setEnabled(not self.ui.xautorangePb.isChecked())
         self.ui.xposSld.setEnabled(not self.ui.xautorangePb.isChecked())
@@ -376,7 +364,7 @@ class Main:
             self.ui.xrangeSld.setValue(int(self.ui.xrangeDsb.value()))
 
             self.ui.xposSld.setMinimum(int(self.ui.xrangeDsb.value()))
-            self.ui.xposSld.setMaximum(int(max(data['time [s]'])))
+            self.ui.xposSld.setMaximum(int(max(data['time [s]'])) + 1)
             self.ui.xposSld.setValue(int(self.ui.xmaxDsb.value()))
 
             try:
@@ -388,7 +376,6 @@ class Main:
                            right=self.ui.xmaxDsb.value())
 
     def xslide_changed(self):
-        # print('Slide cambiato')
         self.ui.xmaxDsb.setValue(self.ui.xposSld.value())
         self.ui.xminDsb.setValue(self.ui.xposSld.value() - self.ui.xrangeDsb.value())
 
@@ -414,19 +401,24 @@ class Main:
 
         self.ax_Q.set_ylim(bottom=y_min, top=y_max)
 
-    def animate(self, i):
-        data = pd.read_csv('Utility/data.csv')
-        x = data['time [s]']
-        y1 = data['Q_set [Nml/min]']
-        y2 = data['Q_read [NmL/min']
+    def folders_manager(self):      # Definizione delle cartelle di salvataggio
+        folders['data'] = os.path.join(os.environ['USERPROFILE'], 'Documents', 'Siargo')
+        if not os.path.isdir(folders['data']):
+            os.makedirs(folders['data'])
 
-        plt.cla()
+        folders['cfg'] = os.path.join(os.environ['USERPROFILE'], 'Siargo')
+        folders['cfgdata'] = os.path.join(folders['cfg'], 'config.yml')
+        if not os.path.isdir(folders['cfg']):
+            os.makedirs(folders['cfg'])
+            with open(folders['cfgdata'], 'w') as f:
+                yaml.dump(instr, f)
 
-        plt.plot(x, y1, label='Channel 1')
-        plt.plot(x, y2, label='Channel 2')
-
-        plt.legend(loc='upper left')
-        plt.tight_layout()
+    def close(self, event):
+        if self.client.connect():  # Connessione al dispositivo
+            self.client.write_register(slave=instr['conn']['slave'], address=187, value=0)
+            self.client.close()
+        with open(folders['cfg'] + '/config.yml', 'w') as f:
+            yaml.dump(instr, f)
 
 
 Main()

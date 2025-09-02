@@ -1,6 +1,15 @@
+import os
+
 instr = {
-    'conn': {},
-    'flux': {}
+    'conn': {
+        'com': 'COM1',
+        'slave': 1,
+    },
+    'flux': {
+        'cap': 1000,
+        'custom': False,
+        'def': 1000,
+    },
 }
 
 
@@ -103,4 +112,12 @@ par = {
     'read': 0,
     'right_expanded': False,
     'down_expanded': False,
+}
+
+
+folders = {
+    'cfg': os.path.expanduser('~' + os.getlogin() + '/Siargo/cfg'),
+    'data': None,
+    'datapath': None,
+    'cfgpath': None,
 }

@@ -1,7 +1,0 @@
-conn:
-  com: COM3
-  slave: 1
-flux:
-  cap: 5000
-  custom: false
-  def: 989

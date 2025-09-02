@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Siargo v1.0</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QProgressBar{
@@ -51,19 +51,6 @@
       <string>Valore</string>
      </property>
     </column>
-   </widget>
-   <widget class="QPushButton" name="refreshPb">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>190</y>
-      <width>80</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Refresh</string>
-    </property>
    </widget>
    <widget class="QDoubleSpinBox" name="setFlowDsb">
     <property name="geometry">
@@ -107,19 +94,6 @@
     </property>
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="sendPb">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>190</y>
-      <width>80</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Send</string>
     </property>
    </widget>
    <widget class="QDoubleSpinBox" name="setPercDsb">
@@ -209,8 +183,8 @@
    <widget class="QDoubleSpinBox" name="fake_flowReadDsb">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>220</y>
+      <x>150</x>
+      <y>190</y>
       <width>101</width>
       <height>25</height>
      </rect>
@@ -222,13 +196,13 @@
      <enum>QAbstractSpinBox::NoButtons</enum>
     </property>
     <property name="suffix">
-     <string> NmL/min</string>
+     <string>%</string>
     </property>
     <property name="maximum">
-     <double>1000.000000000000000</double>
+     <double>100.000000000000000</double>
     </property>
     <property name="singleStep">
-     <double>50.000000000000000</double>
+     <double>5.000000000000000</double>
     </property>
     <property name="value">
      <double>0.000000000000000</double>
@@ -237,8 +211,8 @@
    <widget class="QCheckBox" name="fakeCkb">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>210</y>
+      <x>260</x>
+      <y>195</y>
       <width>70</width>
       <height>17</height>
      </rect>
@@ -464,7 +438,7 @@
      <number>0</number>
     </property>
     <property name="maximum">
-     <double>2000.000000000000000</double>
+     <double>9999.000000000000000</double>
     </property>
     <property name="singleStep">
      <double>50.000000000000000</double>
@@ -694,10 +668,8 @@ border-radius: 5px;</string>
    </widget>
    <zorder>graphMainWgt</zorder>
    <zorder>regTW</zorder>
-   <zorder>refreshPb</zorder>
    <zorder>setFlowDsb</zorder>
    <zorder>setLbl</zorder>
-   <zorder>sendPb</zorder>
    <zorder>setPercDsb</zorder>
    <zorder>readLbl</zorder>
    <zorder>readFlowDsb</zorder>

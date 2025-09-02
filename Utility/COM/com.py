@@ -5,7 +5,7 @@ from pymodbus.client import ModbusSerialClient  # per pymodbus 3.3.x e Python 3.
 import sys
 import serial.tools.list_ports
 import yaml
-from Utility.variables import instr
+from Utility.variables import instr, folders
 
 
 class Com(QtWidgets.QDialog):
@@ -57,9 +57,6 @@ class Com(QtWidgets.QDialog):
         else:
             self.ui.logLe.setText('Connessione FALLITA')
 
-        print(sn)
-        print(client.connect())
-
         client.close()
 
     def new_set(self):
@@ -70,7 +67,6 @@ class Com(QtWidgets.QDialog):
         instr['conn']['com'] = self.ui.comCb.currentText()
         instr['conn']['slave'] = self.ui.slaveSb.value()
 
-        with open('_data/config.yml', 'w') as f:
+        with open(folders['cfg'] + 'config.yml', 'w') as f:
             yaml.dump(instr, f)
-
         self.close()

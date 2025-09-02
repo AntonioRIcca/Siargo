@@ -1,0 +1,3 @@
+pyinstaller --onedir --icon "C:/Users/anton/Desktop/siargo_ico.ico" --name "Siargo" --add-data "C:\Users\anton\PycharmProjects\Siargo\img;img/" --add-data "C:\Users\anton\PycharmProjects\Siargo\ui;ui/" --add-data "C:\Users\anton\PycharmProjects\Siargo\Utility;Utility/"  "C:\Users\anton\PycharmProjects\Siargo/main.py"
+pyinstaller --noconfirm --onedir --windowed --icon "C:/Users/anton/Desktop/siargo_ico.ico" --name "Siargo" --add-data "C:\Users\anton\PycharmProjects\Siargo\img;img/" --add-data "C:\Users\anton\PycharmProjects\Siargo\ui;ui/" --add-data "C:\Users\anton\PycharmProjects\Siargo\Utility;Utility/"  "C:\Users\anton\PycharmProjects\Siargo/main.py"
+

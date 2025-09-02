@@ -14,6 +14,8 @@ class CustomFlowRate(QtWidgets.QDialog):
         self.ui.custCkb.setChecked(instr['flux']['custom'])
         self.ui.custFlowDsb.setValue(instr['flux']['cap'])
 
+        self.cust_check()
+
         self.ui.confirmPb.clicked.connect(self.confirm)
         self.ui.custCkb.clicked.connect(self.cust_check)
 
@@ -29,4 +31,5 @@ class CustomFlowRate(QtWidgets.QDialog):
             bg = 'rgb(216, 216, 216)'
             self.ui.custFlowDsb.setValue(instr['flux']['def'])
         self.ui.custFlowDsb.setStyleSheet('background-color: ' + bg + ';')
+        self.ui.custFlowDsb.setEnabled(self.ui.custCkb.isChecked())
 
