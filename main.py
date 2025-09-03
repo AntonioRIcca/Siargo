@@ -120,6 +120,8 @@ class Main:
             # ---------------------------------------------------------------------------
 
             # Avvio dell'interfaccia
+            self.mainwindow.setFixedSize(self.mainwindow.size())
+            self.mainwindow.setWindowIcon(QtGui.QIcon('img/siargo_ico.ico'))
             self.mainwindow.show()
             self.app.exec()
 
@@ -274,10 +276,10 @@ class Main:
             h = 250
 
         if par['right_expanded']:
-            self.mainwindow.resize(350, h)
+            self.mainwindow.setFixedSize(350, h)
             self.ui.rightExpandPb.setText('>')
         else:
-            self.mainwindow.resize(980, 490)
+            self.mainwindow.setFixedSize(980, 490)
             self.ui.rightExpandPb.setText('<')
         par['right_expanded'] = not par['right_expanded']
 
@@ -290,10 +292,10 @@ class Main:
             h = 250
 
         if par['down_expanded']:
-            self.mainwindow.resize(l, h)
+            self.mainwindow.setFixedSize(l, h)
             self.ui.downExpandPb.setText('V')
         else:
-            self.mainwindow.resize(l, 490)
+            self.mainwindow.setFixedSize(l, 490)
             # self.mainwindow.move(10,10)
             self.ui.downExpandPb.setText('A')
         par['down_expanded'] = not par['down_expanded']
